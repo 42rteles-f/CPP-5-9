@@ -22,6 +22,7 @@ int	main(void)
 		std::cerr << event.what() << std::endl;
 		std::cerr << std::endl;
 	}
+
 	try {
 		tom.setGrade(151);
 	}
@@ -30,6 +31,7 @@ int	main(void)
 		std::cerr << event.what() << std::endl;
 		std::cerr << std::endl;
 	}
+
 	try {
 		tom.setGrade(1);
 		tom.increaseGrade();
@@ -39,6 +41,7 @@ int	main(void)
 		std::cerr << event.what() << std::endl;
 		std::cerr << std::endl;
 	}
+
 	try {
 		tom.setGrade(150);
 		tom.decreaseGrade();
