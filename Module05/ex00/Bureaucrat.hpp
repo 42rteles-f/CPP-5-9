@@ -14,6 +14,7 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+# include <exception>
 
 class Bureaucrat {
 	private:
@@ -31,6 +32,23 @@ class Bureaucrat {
 		void		setGrade(int grade);
 		std::string	getName(void) const;
 		void		setName(std::string name);
+		void		increaseGrade(void);
+		void		decreaseGrade(void);
+
+		class GradeTooLowException: public std::exception {
+			public:
+				const char* what() const throw() {
+					return ("Lowest Grade is 150.");
+				}
+		} ;
+		class GradeTooHighException: public std::exception {
+			public:
+				const char* what() const throw() {
+					return ("Highest Grade is 1.");
+				}
+		} ;
 } ;
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);
 
 #endif
