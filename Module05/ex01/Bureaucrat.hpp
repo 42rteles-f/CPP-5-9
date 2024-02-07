@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
+/*   Updated: 2024/02/05 17:48:18 by rteles-f         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef BUREAUCRAT_HPP
+# define BUREAUCRAT_HPP
+
+# include <iostream>
+# include <exception>
+
+class Bureaucrat {
+	private:
+		std::string	_name;
+		int			_grade;
+
+	public:
+		Bureaucrat();
+		Bureaucrat(const Bureaucrat& tocopy);
+		~Bureaucrat();
+
+		Bureaucrat& operator=(const Bureaucrat& tocopy);
+
+		int			getGrade(void) const;
+		void		setGrade(int grade);
+		std::string	getName(void) const;
+		void		setName(std::string name);
+		void		increaseGrade(void);
+		void		decreaseGrade(void);
+
+		class GradeTooLowException: public std::exception {
+			public:
+				const char* what() const throw() {
+					return ("Lowest Grade is 150.");
+				}
+		} ;
+		class GradeTooHighException: public std::exception {
+			public:
+				const char* what() const throw() {
+					return ("Highest Grade is 1.");
+				}
+		} ;
+} ;
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);
+
+#endif
