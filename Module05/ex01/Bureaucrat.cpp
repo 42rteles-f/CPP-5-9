@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat():
 _name(""), _grade(150)
@@ -28,8 +29,8 @@ Bureaucrat::~Bureaucrat()
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& tocopy) {
 	if (this == &tocopy)
 		return (*this);
-	this->_name = tocopy->_name;
-	this->_grade = tocopy->_grade;
+	this->_name = tocopy._name;
+	this->_grade = tocopy._grade;
 	return (*this);
 }
 
@@ -69,4 +70,22 @@ void	Bureaucrat::increaseGrade(void) {
 
 void	Bureaucrat::decreaseGrade(void) {
 	(this->_grade < 150) ? this->_grade++ : throw GradeTooLowException();
+}
+
+void	Bureaucrat::signForm(Form& form) const {
+	try {
+		form.beSigned(*this);
+		std::cout << _name << " signed " << form.getName() << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+	}
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+	return ("Grade Too Low.");
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return ("Grade Too Hight.");
 }

@@ -5,7 +5,6 @@ This exercise is designed to showcase the throw errors.
 It should throw errors when changing the grade manually, or when using the increase/decrease methods.
 It should also contain a overload of the <<operator
 
-
 Declaring Custom exception Within the Class:
 Small Projects or Specific Exceptions: 
 */
@@ -34,6 +33,7 @@ int	main(void)
 
 	try {
 		tom.setGrade(1);
+		std::cout << tom;
 		tom.increaseGrade();
 	}
 	catch (std::exception& event) {
@@ -44,11 +44,11 @@ int	main(void)
 
 	try {
 		tom.setGrade(150);
+		std::cout << tom;
 		tom.decreaseGrade();
 	}
 	catch (std::exception& event) {
 		std::cerr << "test decrease" << std::endl;
 		std::cerr << event.what() << std::endl;
 	}
-	std::cout << tom << std::endl;
 }

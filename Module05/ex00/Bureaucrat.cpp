@@ -13,7 +13,7 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat():
-_name(""), _grade(150)
+_name("John"), _grade(150)
 { std::cout << "Bureaucrat Default Constructor called." << std::endl; }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& tocopy)
@@ -28,8 +28,8 @@ Bureaucrat::~Bureaucrat()
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& tocopy) {
 	if (this == &tocopy)
 		return (*this);
-	this->_name = tocopy->_name;
-	this->_grade = tocopy->_grade;
+	this->_name = tocopy._name;
+	this->_grade = tocopy._grade;
 	return (*this);
 }
 
@@ -69,4 +69,12 @@ void	Bureaucrat::increaseGrade(void) {
 
 void	Bureaucrat::decreaseGrade(void) {
 	(this->_grade < 150) ? this->_grade++ : throw GradeTooLowException();
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+	return ("Grade Too Low.");
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return ("Grade Too Hight.");
 }

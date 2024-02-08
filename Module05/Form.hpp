@@ -16,40 +16,15 @@
 # include <iostream>
 # include <exception>
 
-class Bureaucrat;
-
 class Form {
 	private:
-		const std::string	_name;
-		const int			_grade_to_sign;
-		const int			_grade_to_exec;
-		bool				_signed;
 
 	public:
 		Form();
-		Form(std::string name, int grade_to_sign, int grade_to_execute);
 		Form(const Form& tocopy);
 		~Form();
 
 		Form& operator=(const Form& tocopy);
-
-		std::string 	getName() const;
-		int 			getGradeToSign() const;
-		int 			getGradeExec() const;
-		bool 			isSigned() const;
-		void 			beSigned(const Bureaucrat& obj);
-		int				isValidGrade(int grade) const;
-
-		class GradeTooLowException: public std::exception {
-			public:
-				const char* what() const throw();
-		} ;
-		class GradeTooHighException: public std::exception {
-			public:
-				const char* what() const throw();
-		} ;
 } ;
-
-std::ostream& operator<<(std::ostream& os, const Form& obj);
 
 #endif

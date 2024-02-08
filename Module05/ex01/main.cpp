@@ -1,54 +1,86 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 /*
-This exercise is designed to showcase the throw errors.
-It should throw errors when changing the grade manually, or when using the increase/decrease methods.
-It should also contain a overload of the <<operator
+missing tests.
 
-
-Declaring Custom exception Within the Class:
-Small Projects or Specific Exceptions: 
 */
 int	main(void)
 {
 	Bureaucrat	tom;
 
 	tom.setName("Tom");
-	try {
-		tom.setGrade(0);
-	}
-	catch (std::exception& event) {
-		std::cerr << "test grade 0" << std::endl;
-		std::cerr << event.what() << std::endl;
-		std::cerr << std::endl;
-	}
-
-	try {
-		tom.setGrade(151);
-	}
-	catch (std::exception& event) {
-		std::cerr << "test grade 151" << std::endl;
-		std::cerr << event.what() << std::endl;
-		std::cerr << std::endl;
-	}
-
-	try {
-		tom.setGrade(1);
-		tom.increaseGrade();
-	}
-	catch (std::exception& event) {
-		std::cerr << "test increase" << std::endl;
-		std::cerr << event.what() << std::endl;
-		std::cerr << std::endl;
+	tom.setGrade(50);
+	{
+		std::cout << "Invalid Sign Grade test" << std::endl;
+		try {
+			std::cout << "Grade 0" << std::endl;
+			Form	abc("abc", 0, 50);
+			std::cout << abc << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl << std::endl;
+		}
+		try {
+			std::cout << "Grade 151" << std::endl;
+			Form	abc("abc", 151, 50);
+			std::cout << abc << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl << std::endl;
+		}
+	std::cout << "-------------" << std::endl;
 	}
 
-	try {
-		tom.setGrade(150);
-		tom.decreaseGrade();
+	{
+		std::cout << "Invalid Execute Grade test" << std::endl;
+		try {
+			std::cout << "Grade 0" << std::endl;
+			Form	abc("abc", 50, 0);
+			std::cout << abc << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl << std::endl;
+		}
+		try {
+			std::cout << "Grade 151" << std::endl;
+			Form	abc("abc", 50, 151);
+			std::cout << abc << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl << std::endl;
+		}
+	std::cout << "-------------" << std::endl;
 	}
-	catch (std::exception& event) {
-		std::cerr << "test decrease" << std::endl;
-		std::cerr << event.what() << std::endl;
+
+	{
+		std::cout << "Valid Grades Test" << std::endl;
+		try {
+			std::cout << "Grade 50, 50" << std::endl;
+			Form	abc("abc", 50, 50);
+			std::cout << abc << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl << std::endl;
+		}
+	std::cout << "-------------" << std::endl;
+	}
+
+	{
+		std::cout << "Sign test" << std::endl;
+		try {
+			Form	abc("abc", 50, 50);
+			tom.signForm(abc);
+			std::cout << abc << std::endl;
+
+			Form	qwe("qwe", 49, 49);
+			std::cout << qwe << std::endl;
+			tom.signForm(qwe);
+		}
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl << std::endl;
+		}
+	std::cout << "-------------" << std::endl;
 	}
 	std::cout << tom << std::endl;
 }

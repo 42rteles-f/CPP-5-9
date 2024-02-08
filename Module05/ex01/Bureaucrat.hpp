@@ -16,6 +16,8 @@
 # include <iostream>
 # include <exception>
 
+class Form;
+
 class Bureaucrat {
 	private:
 		std::string	_name;
@@ -34,18 +36,15 @@ class Bureaucrat {
 		void		setName(std::string name);
 		void		increaseGrade(void);
 		void		decreaseGrade(void);
+		void		signForm(Form& form) const;
 
 		class GradeTooLowException: public std::exception {
 			public:
-				const char* what() const throw() {
-					return ("Lowest Grade is 150.");
-				}
+				const char* what() const throw();
 		} ;
 		class GradeTooHighException: public std::exception {
 			public:
-				const char* what() const throw() {
-					return ("Highest Grade is 1.");
-				}
+				const char* what() const throw();
 		} ;
 } ;
 
