@@ -45,17 +45,18 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor)
 {
 	std::ofstream outfile;
 
-	if (executor.getGrade() <=  this->getGradeExec()) {
-        outfile.open((_target + "_shruberry").c_str(), std::ofstream::trunc);
-        if (!outfile) {
-            outfile.close();
-            throw std::runtime_error("Failed to open file");
-            return ;
-        }
-		outfile.write(_tree.c_str(), _tree.size());
-    }
-	else
+	if (!this->isSigned())
+		throw FormNotSigned();
+	else if (executor.getGrade() > this->getGradeExec())
 		throw GradeTooLowException();
+
+	outfile.open((_target + "_shruberry").c_str(), std::ofstream::trunc);
+	if (!outfile) {
+		outfile.close();
+		throw std::runtime_error("Failed to open file");
+		return ;
+	}
+	outfile.write(_tree.c_str(), _tree.size());
 }
 
 const std::string	ShrubberyCreationForm::_tree =

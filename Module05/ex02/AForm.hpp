@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/12 19:09:15 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:06:55 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ class AForm {
 				const char* what() const throw();
 		} ;
 		class GradeTooHighException: public std::exception {
+			public:
+				const char* what() const throw();
+		} ;
+		class FormNotSigned: public std::exception {
 			public:
 				const char* what() const throw();
 		} ;

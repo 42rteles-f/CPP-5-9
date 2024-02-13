@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:13 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/12 23:55:47 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:30:47 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,10 @@ int	Bureaucrat::getGrade(void) const {
 }
 
 void	Bureaucrat::setGrade(int grade) {
-	if (grade < 1) {
+	if (grade < 1)
 		throw GradeTooHighException();
-		return ;
-	}
-	else if (grade > 150) {
+	else if (grade > 150)
 		throw GradeTooLowException();
-		return ;
-	}
 	this->_grade = grade;
 }
 

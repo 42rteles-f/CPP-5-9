@@ -6,7 +6,7 @@
 #    By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 20:08:19 by rteles-f          #+#    #+#              #
-#    Updated: 2024/02/12 23:30:10 by rteles-f         ###   ########.fr        #
+#    Updated: 2024/02/13 19:31:40 by rteles-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM			= 	rm -f
 
 INCLUDES	= 	-I
 
-SRCS		=	main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp #RobotomyRequestForm.cpp PresidentialPardonForm.cpp 
+SRCS		=	main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp #PresidentialPardonForm.cpp 
 
 OBJS		= 	$(SRCS:.cpp=.o)
 
