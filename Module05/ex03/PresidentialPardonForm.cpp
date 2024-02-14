@@ -1,57 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                     :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 17:30:13 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/05 17:47:00 by rteles-f         ###   ########.fr       */
+/*   Created: 2024/02/14 13:12:16 by rteles-f          #+#    #+#             */
+/*   Updated: 2024/02/14 13:15:20 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm():
-AForm("Shrubbery", 145, 137), _target("None")
+PresidentialPardonForm::PresidentialPardonForm():
+AForm("Shrubbery", 25, 5), _target("None")
 {
 	std::cout << " < Shrubbery Default Constructor called. >" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target):
-AForm("Shrubbery", 145, 137), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target):
+AForm("Shrubbery", 25, 5), _target(target)
 {
 	std::cout << " < Shrubbery Default Constructor called. >" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& tocopy)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& tocopy)
 {
 	std::cout << " < Shrubbery Copy Constructor called. >" << std::endl;
 	*this = tocopy;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm()
+PresidentialPardonForm::~PresidentialPardonForm()
 { std::cout << " < Shrubbery Destructor called. >" << std::endl; }
 
-RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& tocopy) {
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& tocopy) {
 	if (this == &tocopy)
 		return (*this);
 	this->_target = tocopy._target;
 	return (*this);
 }
 
-void	RobotomyRequestForm::execute(Bureaucrat const & executor)
+void	PresidentialPardonForm::execute(Bureaucrat const & executor)
 {
 	if (!this->isSigned())
 		throw FormNotSigned();
-	else if (executor.getGrade() > this->getGradeExec())
+	else if (executor.getGrade() >  this->getGradeExec())
 		throw GradeTooLowException();
 
-	std::cout << "*DRILLING NOISES* ";
-	std::srand(std::time(0));
-	if ((std::rand() % 2))
-		std::cout << _target << " has been Robotomized." << std::endl;
-	else
-		std::cout << "The Robotomy on " << _target << " has Failed." << std::endl;
+	std::cout << _target << " has been Pardoned by Zaphod Beeblebrox" << std::endl;
 }
