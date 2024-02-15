@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/14 15:58:54 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:25:53 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 
 # include <iostream>
 # include <sstream>
+# include <string>
+# include <cstdlib>
+# include <exception>
+# include <climits>
+# include <iomanip>
+# include <cmath>
+
+enum {
+	CHAR, INT, DOUBLE, FLOAT, IMPOSSIBLE
+} ;
 
 class ScalarConverter {
 	private:
+		// bool	_overflow[4];
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& tocopy);
 		~ScalarConverter();
-		static void	printChar(std::string convert);
-		static void	printInt(std::string convert);
-		static void	printFloat(std::string convert);
-		static void	printDouble(std::string convert);
 
 	public:
 		static void	convert(const std::string convert);
