@@ -30,111 +30,105 @@ bool	isInt(const std::string& str){
 			str[i]; i++)
 	{
 		if (!std::isdigit(str[i]))
-			return (false);	
+			return (false);
 	}
 	return (true);
 }
 
-bool	isFloat(const std::string& str) {
+bool	isDouble(std::string str) {
 
-	int			dot = str.find('.');
-	std::string	nof = str.substr(dot);
+	size_t	dot = str.find('.');
 
-	if (((size_t)dot == std::string::npos)
-		|| (str[str.size() - 1] != 'f'))
+	if (dot == std::string::npos)
 		return (false);
-	nof[nof.size() - 1] = 0;
-	if (isInt(nof))
+	str[dot] = 0;
+	if (!isInt(str) || !std::isdigit(str[dot + 1]) || !isInt(str.substr(dot + 1)))
+		return (false);
+	return (true);
+}
+
+bool	isFloat(std::string str) {
+
+	if (str[str.size() - 1] != 'f')
+		return (false);
+	str[str.size() - 1] = 0;
+	if (isDouble(str))
 		return (true);
 	return (false);
 }
 
-bool	isDouble(const std::string& str) {
+bool	isOverflow(std::string str) {
+	std::ostringstream stream;
 
-	int	dot = str.find('.');
-	
-	if ((size_t)dot == std::string::npos)
-		return (false);
-	if (isInt(str.substr(dot)))
+    stream << std::atoll(str.c_str());
+	if (stream.str() != str)
 		return (true);
+	return (false);
 }
 
 int inputType(const std::string& str)
 {
 	if (str.size() == 1)
-		return (CHAR);
+		return (isOverflow(str) ? OVERFLOW : CHAR);
 	if (isInt(str))
-		return (INT);
+		return (isOverflow(str) ? OVERFLOW : INT);
 	if (isFloat(str))
-		return (FLOAT);
+		return (isOverflow(str) ? OVERFLOW : FLOAT);
 	if (isDouble(str))
-		return (DOUBLE);
+		return (isOverflow(str) ? OVERFLOW : DOUBLE);
 	return (IMPOSSIBLE);
 }
 
-// int numberType(const std::string& str)
-// {
-// 	int	dot = 0;
-// 	int	f = 0;
-
-//     for (int i = (str[0] == '+') || (str[0] == '-');
-// 			str[i]; ++i) {
-// 		dot += (str[i] == '.');
-// 		f += (str[i] == 'f');
-//         if ((!isdigit(str[i]) && (str[i] != '.') && (str[i] != 'f'))
-// 			|| (dot > 1))
-//             return (IMPOSSIBLE);
-// 		if ((str[i] == 'f' && i != (int)(str.size() - 1))
-// 			|| (str[i] == '.' && i == (int)(str.size() - 1)))
-//             return (IMPOSSIBLE);
-//     }
-// 	// if ()
-//     return (dot + f + 1);
-// }
-
 template<typename T>
-void	printAll(T print)
+void	printAll(T print, long long size)
 {
 	std::cout << "char: ";
-	if (print > 31 && print < 127)
+	if (size > 31 && size < 127)
 		std::cout << "'" << static_cast<char>(print) << "'" << std::endl;
 	else
 		std::cout << "Not a Character." << std::endl;
-	std::cout << "int: " << static_cast<int>(print) << std::endl;
-	std::cout	<< "float: " << std::fixed << std::setprecision(1)
-				<< static_cast<float>(print) << "f" << std::endl;
-	std::cout	<< "double: " << std::fixed << std::setprecision(1)
-				<< static_cast<double>(print) << std::endl;
+
+	if (size < INT_MAX && size > INT_MIN)
+		std::cout << "int: " << static_cast<int>(print) << std::endl;
+	else
+		std::cout << "int: Conversion Overflow." << std::endl;
+
+	if (size < FLT_MAX && size > FLT_MIN) {
+		std::cout	<< "float: " << std::fixed << std::setprecision(1)
+					<< static_cast<float>(print) << "f" << std::endl;
+	}
+	else
+		std::cout << "float: Conversion Overflow." << std::endl;
+
+	if (size < DBL_MAX && size > DBL_MIN) {
+		std::cout	<< "double: " << std::fixed << std::setprecision(1)
+					<< static_cast<double>(print) << std::endl;
+	}
+	else
+		std::cout << "double: Conversion Overflow." << std::endl;
 }
 
-/*
-Int overflow - breaks all
-float overflow - breaks int, double
-double overflow - breaks int, double
-*/
-
 void	ScalarConverter::convert(const std::string convert) {
-	// int	type;
 
-	// if (convert.size() == 1)
-	// 	type = CHAR;
-	// else
-	// 	type = numberType(convert);
+	if (convert.empty())
+		return ;
 	switch (inputType(convert)) {
 	case CHAR:
-		printAll<char>(convert[0]);
+		printAll<char>(convert[0], std::atoll(convert.c_str()));
 		break;
 	case INT:
-		printAll<int>(std::atoi(convert.c_str()));
+		printAll<int>(std::atoi(convert.c_str()), std::atoll(convert.c_str()));
 		break;
 	case FLOAT:
-		printAll<float>(std::atof(convert.c_str()));
+		printAll<float>(std::atof(convert.c_str()), std::atoll(convert.c_str()));
 		break;
 	case DOUBLE:
-		printAll<double>(std::atof(convert.c_str()));
+		printAll<double>(std::atof(convert.c_str()), std::atoll(convert.c_str()));
 		break;
+	case OVERFLOW:
+		std::cout << "Overflow ";
+		// fall through
 	default:
 		std::cout << "Impossible Conversion." << std::endl;
 	}
-	
 }

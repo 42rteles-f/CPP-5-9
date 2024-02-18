@@ -21,9 +21,10 @@
 # include <climits>
 # include <iomanip>
 # include <cmath>
+# include <cfloat>
 
 enum {
-	CHAR, INT, DOUBLE, FLOAT, IMPOSSIBLE
+	CHAR, INT, DOUBLE, FLOAT, OVERFLOW,IMPOSSIBLE
 } ;
 
 class ScalarConverter {
