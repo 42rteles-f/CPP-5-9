@@ -2,7 +2,8 @@
 
 int	main(int ac, char **args)
 {
-    (void)ac;
+	if (ac != 2)
+		return (0);
     ScalarConverter::convert(args[1]);
 
 }

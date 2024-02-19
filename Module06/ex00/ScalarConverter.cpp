@@ -57,78 +57,80 @@ bool	isFloat(std::string str) {
 	return (false);
 }
 
-bool	isOverflow(std::string str) {
-	std::ostringstream stream;
+bool	isOverflow(std::string str, int type) {
 
-    stream << std::atoll(str.c_str());
-	if (stream.str() != str)
+	long long	number = std::atoll(str.c_str());
+
+	if (type == CHAR && (number > CHAR_MAX || number < CHAR_MIN))
+		return (true);
+	if (type == INT && (number > INT_MAX || number < INT_MIN))
+		return (true);
+	if (type == FLOAT && (number > FLT_MAX || number < FLT_MIN))
+		return (true);
+	if (type == DOUBLE && (number > DBL_MAX || number < DBL_MIN))
 		return (true);
 	return (false);
 }
 
 int inputType(const std::string& str)
 {
+	if (str.empty())
+		return (IMPOSSIBLE);
 	if (str.size() == 1)
-		return (isOverflow(str) ? OVERFLOW : CHAR);
+		return (isOverflow(str, CHAR) ? OVERFLOW : CHAR);
 	if (isInt(str))
-		return (isOverflow(str) ? OVERFLOW : INT);
+		return (isOverflow(str, INT) ? OVERFLOW : INT);
 	if (isFloat(str))
-		return (isOverflow(str) ? OVERFLOW : FLOAT);
+		return (isOverflow(str, FLOAT) ? OVERFLOW : FLOAT);
 	if (isDouble(str))
-		return (isOverflow(str) ? OVERFLOW : DOUBLE);
+		return (isOverflow(str, DOUBLE) ? OVERFLOW : DOUBLE);
 	return (IMPOSSIBLE);
 }
 
 template<typename T>
-void	printAll(T print, long long size)
+void	printAll(T print)
 {
 	std::cout << "char: ";
-	if (size > 31 && size < 127)
+	if (print > 31 && print < 127)
 		std::cout << "'" << static_cast<char>(print) << "'" << std::endl;
 	else
 		std::cout << "Not a Character." << std::endl;
 
-	if (size < INT_MAX && size > INT_MIN)
+	if (print <= INT_MAX && print >= INT_MIN)
 		std::cout << "int: " << static_cast<int>(print) << std::endl;
 	else
 		std::cout << "int: Conversion Overflow." << std::endl;
 
-	if (size < FLT_MAX && size > FLT_MIN) {
-		std::cout	<< "float: " << std::fixed << std::setprecision(1)
-					<< static_cast<float>(print) << "f" << std::endl;
-	}
-	else
-		std::cout << "float: Conversion Overflow." << std::endl;
+	std::cout	<< "float: " << static_cast<float>(print);
+	if ((static_cast<long long>(print * 10) % 10) == 0)
+		std::cout << ".0";
+	std::cout << "f" << std::endl;
 
-	if (size < DBL_MAX && size > DBL_MIN) {
-		std::cout	<< "double: " << std::fixed << std::setprecision(1)
-					<< static_cast<double>(print) << std::endl;
-	}
-	else
-		std::cout << "double: Conversion Overflow." << std::endl;
+	std::cout << "double: " << static_cast<double>(print);
+	if ((static_cast<long long>(print * 10) % 10) == 0)
+		std::cout << ".0";
+	std::cout << std::endl;
 }
 
 void	ScalarConverter::convert(const std::string convert) {
 
-	if (convert.empty())
-		return ;
 	switch (inputType(convert)) {
-	case CHAR:
-		printAll<char>(convert[0], std::atoll(convert.c_str()));
-		break;
-	case INT:
-		printAll<int>(std::atoi(convert.c_str()), std::atoll(convert.c_str()));
-		break;
-	case FLOAT:
-		printAll<float>(std::atof(convert.c_str()), std::atoll(convert.c_str()));
-		break;
-	case DOUBLE:
-		printAll<double>(std::atof(convert.c_str()), std::atoll(convert.c_str()));
-		break;
-	case OVERFLOW:
-		std::cout << "Overflow ";
-		// fall through
-	default:
-		std::cout << "Impossible Conversion." << std::endl;
+		case CHAR:
+			printAll<char>(convert[0]);
+			break;
+		case INT:
+			printAll<int>(std::atoi(convert.c_str()));
+			break;
+		case FLOAT:
+			printAll<float>(std::atof(convert.c_str()));
+			break;
+		case DOUBLE:
+			printAll<double>(std::atof(convert.c_str()));
+			break;
+		case OVERFLOW:
+			std::cout << "Overflow ";
+			// fall through
+		default:
+			std::cout << "Impossible Conversion." << std::endl;
 	}
 }
