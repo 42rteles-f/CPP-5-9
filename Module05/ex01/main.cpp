@@ -2,14 +2,14 @@
 #include "Form.hpp"
 
 /*
-missing tests.
+More throws exercises.
+Throw where the code doesnt stop within a method.
 
 */
 int	main(void)
 {
-	Bureaucrat	tom;
+	Bureaucrat	tom("Tom");
 
-	tom.setName("Tom");
 	tom.setGrade(50);
 	{
 		std::cout << "Invalid Sign Grade test" << std::endl;

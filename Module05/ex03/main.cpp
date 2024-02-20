@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 // #include "Form.hpp"
 /*
 missing tests.
@@ -7,13 +7,16 @@ missing tests.
 */
 int	main(void)
 {
-	Bureaucrat	tom;
-	ShrubberyCreationForm tree("amazon");	
+	Bureaucrat	tom("Tom");
+	Intern		slave;
+	AForm		*form;
 
-	tom.setGrade(150);
-	tom.setName("tom");
 	try {
-		tree.execute(tom);
+		tom.setGrade(1);
+		form = slave.makeForm("shruberry creation", "amazon");
+		tom.signForm(*form);
+		form->execute(tom);
+		free(form);
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;

@@ -15,11 +15,11 @@
 
 AForm::AForm():
 _name("Default AForm"), _grade_to_sign(150), _grade_to_exec(150), _signed(false)
-{ std::cout << " < AForm Default Constructor called. >" << std::endl; }
+{}
 
 AForm::AForm(std::string name, int grade_to_sign, int grade_to_execute):
 _name(name), _grade_to_sign(isValidGrade(grade_to_sign)), _grade_to_exec(isValidGrade(grade_to_execute)), _signed(false)
-{ std::cout << " < AForm Define Constructor called. >" << std::endl; }
+{}
 
 AForm::AForm(const AForm& tocopy):
 _name(""), _grade_to_sign(150), _grade_to_exec(150), _signed(false)
@@ -29,7 +29,7 @@ _name(""), _grade_to_sign(150), _grade_to_exec(150), _signed(false)
 }
 
 AForm::~AForm()
-{ std::cout << " < AForm Destructor called. >" << std::endl; }
+{}
 
 AForm& AForm::operator=(const AForm& tocopy) {
 	if (this == &tocopy)

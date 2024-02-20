@@ -6,16 +6,28 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:18:20 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/14 14:00:46 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:33:30 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
 
-Intern::Intern():
-functions{newShruberry, newPresidential, newRobotomy, NULL},
-_cases{"shruberry creation", "presidential pardon", "robotomy request", NULL}
-{ std::cout << "Intern Default Constructor called." << std::endl; }
+AForm	*newShruberry(std::string target);
+AForm	*newPresidential(std::string target);
+AForm	*newRobotomy(std::string target);
+
+Intern::Intern()
+{	
+	functions[0] = newShruberry;
+	functions[1] = newPresidential;
+	functions[2] = newRobotomy;
+	functions[3] = NULL;
+	_cases[0] = (char *)"shruberry creation";
+	_cases[1] = (char *)"presidential pardon";
+	_cases[2] = (char *)"robotomy request";
+	_cases[3] = NULL;
+	std::cout << "Intern Default Constructor called." << std::endl; 
+}
 
 Intern::Intern(const Intern& tocopy)
 {

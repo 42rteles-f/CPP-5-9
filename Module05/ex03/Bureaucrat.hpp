@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/12 22:35:00 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:05:12 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ class AForm;
 
 class Bureaucrat {
 	private:
-		std::string	_name;
-		int			_grade;
+		const std::string	_name;
+		int					_grade;
 
 	public:
 		Bureaucrat();
+		Bureaucrat(std::string);
 		Bureaucrat(const Bureaucrat& tocopy);
 		~Bureaucrat();
 
@@ -33,10 +34,10 @@ class Bureaucrat {
 		int			getGrade(void) const;
 		void		setGrade(int grade);
 		std::string	getName(void) const;
-		void		setName(std::string name);
 		void		increaseGrade(void);
 		void		decreaseGrade(void);
 		void		signForm(AForm& form) const;
+
 
 		class GradeTooLowException: public std::exception {
 			public:

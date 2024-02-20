@@ -16,18 +16,15 @@
 RobotomyRequestForm::RobotomyRequestForm():
 AForm("Shrubbery", 145, 137), _target("None")
 {
-	std::cout << " < Shrubbery Default Constructor called. >" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target):
 AForm("Shrubbery", 145, 137), _target(target)
 {
-	std::cout << " < Shrubbery Default Constructor called. >" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& tocopy)
 {
-	std::cout << " < Shrubbery Copy Constructor called. >" << std::endl;
 	*this = tocopy;
 }
 

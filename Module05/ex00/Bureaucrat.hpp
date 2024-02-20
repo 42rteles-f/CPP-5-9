@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/05 17:48:18 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:57:16 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 
 class Bureaucrat {
 	private:
-		std::string	_name;
-		int			_grade;
+		const std::string	_name;
+		int					_grade;
 
 	public:
 		Bureaucrat();
+		Bureaucrat(std::string);
 		Bureaucrat(const Bureaucrat& tocopy);
 		~Bureaucrat();
 
@@ -31,7 +32,6 @@ class Bureaucrat {
 		int			getGrade(void) const;
 		void		setGrade(int grade);
 		std::string	getName(void) const;
-		void		setName(std::string name);
 		void		increaseGrade(void);
 		void		decreaseGrade(void);
 

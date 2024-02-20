@@ -16,18 +16,15 @@
 ShrubberyCreationForm::ShrubberyCreationForm():
 AForm("Shrubbery", 145, 137), _target("None")
 { 
-	std::cout << " < Shrubbery Default Constructor called. >" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target):
 AForm("Shrubbery", 145, 137), _target(target)
 {
-	std::cout << " < Shrubbery Default Constructor called. >" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& tocopy)
 {
-	std::cout << " < Shrubbery Copy Constructor called. >" << std::endl;
 	*this = tocopy;
 }
 

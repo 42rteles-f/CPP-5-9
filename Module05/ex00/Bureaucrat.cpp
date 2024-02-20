@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:13 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/05 17:47:00 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:57:01 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 Bureaucrat::Bureaucrat():
 _name("John"), _grade(150)
+{ std::cout << "Bureaucrat Default Constructor called." << std::endl; }
+
+Bureaucrat::Bureaucrat(std::string name):
+_name(name), _grade(150)
 { std::cout << "Bureaucrat Default Constructor called." << std::endl; }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& tocopy)
@@ -28,7 +32,6 @@ Bureaucrat::~Bureaucrat()
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& tocopy) {
 	if (this == &tocopy)
 		return (*this);
-	this->_name = tocopy._name;
 	this->_grade = tocopy._grade;
 	return (*this);
 }
@@ -57,10 +60,6 @@ void	Bureaucrat::setGrade(int grade) {
 
 std::string	Bureaucrat::getName(void) const {
 	return (this->_name);
-}
-
-void	Bureaucrat::setName(std::string name) {
-	this->_name = name;
 }
 
 void	Bureaucrat::increaseGrade(void) {

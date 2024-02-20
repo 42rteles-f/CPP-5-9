@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:10:58 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/14 13:11:28 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:36:39 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <cstdlib>
 # include <ctime>
 
-#include "AForm.hpp"
+# include "AForm.hpp"
 
 class PresidentialPardonForm: public AForm {
 	private:
