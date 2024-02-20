@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:13 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/15 18:05:45 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:39:26 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	isFloat(std::string str) {
 
 bool	isOverflow(std::string str, int type) {
 
-	long long	number = std::atoll(str.c_str());
+	double	number = std::atof(str.c_str());
 
 	if (type == CHAR && (number > CHAR_MAX || number < CHAR_MIN))
 		return (true);
@@ -84,6 +84,8 @@ int inputType(const std::string& str)
 		return (isOverflow(str, FLOAT) ? OVERFLOW : FLOAT);
 	if (isDouble(str))
 		return (isOverflow(str, DOUBLE) ? OVERFLOW : DOUBLE);
+	if (str == "inf" || str == "+inf" || str == "-inf" || str == "nan")
+		return (DOUBLE);
 	return (IMPOSSIBLE);
 }
 
@@ -96,7 +98,7 @@ void	printAll(T print)
 	else
 		std::cout << "Not a Character." << std::endl;
 
-	if (print <= INT_MAX && print >= INT_MIN)
+	if (static_cast<long long>(print) == static_cast<int>(print))
 		std::cout << "int: " << static_cast<int>(print) << std::endl;
 	else
 		std::cout << "int: Conversion Overflow." << std::endl;
@@ -129,7 +131,6 @@ void	ScalarConverter::convert(const std::string convert) {
 			break;
 		case OVERFLOW:
 			std::cout << "Overflow ";
-			// fall through
 		default:
 			std::cout << "Impossible Conversion." << std::endl;
 	}
