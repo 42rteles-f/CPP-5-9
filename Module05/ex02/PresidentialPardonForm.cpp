@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:12:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/20 21:38:12 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:25:34 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "Bureaucrat.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm():
-AForm("Shrubbery", 25, 5), _target("None")
+AForm("Presidential", 25, 5), _target("None")
 {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target):
-AForm("Shrubbery", 25, 5), _target(target)
+AForm("Presidential", 25, 5), _target(target)
 {
 }
 
@@ -29,7 +29,7 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& toc
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
-{ std::cout << " < Shrubbery Destructor called. >" << std::endl; }
+{ std::cout << " < Presidential Destructor called. >" << std::endl; }
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& tocopy) {
 	if (this == &tocopy)
@@ -38,7 +38,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const & executor)
+void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
 	if (!this->isSigned())
 		throw FormNotSigned();

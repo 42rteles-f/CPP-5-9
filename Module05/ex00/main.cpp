@@ -10,7 +10,7 @@ Small Projects or Specific Exceptions:
 */
 int	main(void)
 {
-	Bureaucrat	tom("tom");
+	Bureaucrat	tom("tom", 50);
 
 	try {
 		tom.setGrade(0);

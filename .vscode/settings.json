@@ -2,6 +2,7 @@
     "files.associations": {
         "exception": "cpp",
         "stdexcept": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ctime": "cpp"
     }
 }

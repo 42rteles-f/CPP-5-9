@@ -22,9 +22,9 @@ _name(name), _grade_to_sign(isValidGrade(grade_to_sign)), _grade_to_exec(isValid
 { std::cout << "Form Define Constructor called." << std::endl; }
 
 Form::Form(const Form& tocopy):
-_name(""), _grade_to_sign(150), _grade_to_exec(150), _signed(false)
+_name(tocopy._name), _grade_to_sign(tocopy._grade_to_sign), _grade_to_exec(tocopy._grade_to_exec), _signed(tocopy._signed)
 {
-	std::cout << "Form Copy Constructor called." << std::endl;
+	std::cout << " < Form Copy Constructor called. >" << std::endl;
 	*this = tocopy;
 }
 

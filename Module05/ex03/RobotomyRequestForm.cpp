@@ -14,12 +14,12 @@
 #include "Bureaucrat.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm():
-AForm("Shrubbery", 145, 137), _target("None")
+AForm("Robotomy", 72, 45), _target("None")
 {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target):
-AForm("Shrubbery", 145, 137), _target(target)
+AForm("Robotomy", 72, 45), _target(target)
 {
 }
 
@@ -29,7 +29,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& tocopy)
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()
-{ std::cout << " < Shrubbery Destructor called. >" << std::endl; }
+{ std::cout << " < Robotomy Destructor called. >" << std::endl; }
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& tocopy) {
 	if (this == &tocopy)

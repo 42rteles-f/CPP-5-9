@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:18:20 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/20 22:33:30 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:25:42 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ AForm	*newPresidential(std::string target);
 AForm	*newRobotomy(std::string target);
 
 Intern::Intern()
-{	
+{
 	functions[0] = newShruberry;
 	functions[1] = newPresidential;
 	functions[2] = newRobotomy;

@@ -8,7 +8,7 @@ Throw where the code doesnt stop within a method.
 */
 int	main(void)
 {
-	Bureaucrat	tom("Tom");
+	Bureaucrat	tom("Tom", 50);
 
 	tom.setGrade(50);
 	{
@@ -19,7 +19,7 @@ int	main(void)
 			std::cout << abc << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cout << e.what() << std::endl << std::endl;
+			std::cout << "catch: " << e.what() << std::endl << std::endl;
 		}
 		try {
 			std::cout << "Grade 151" << std::endl;
@@ -27,7 +27,7 @@ int	main(void)
 			std::cout << abc << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cout << e.what() << std::endl << std::endl;
+			std::cout << "catch: " << e.what() << std::endl << std::endl;
 		}
 	std::cout << "-------------" << std::endl;
 	}
@@ -40,7 +40,7 @@ int	main(void)
 			std::cout << abc << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cout << e.what() << std::endl << std::endl;
+			std::cout << "catch: " << e.what() << std::endl << std::endl;
 		}
 		try {
 			std::cout << "Grade 151" << std::endl;
@@ -48,7 +48,7 @@ int	main(void)
 			std::cout << abc << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cout << e.what() << std::endl << std::endl;
+			std::cout << "catch: " << e.what() << std::endl << std::endl;
 		}
 	std::cout << "-------------" << std::endl;
 	}
@@ -61,7 +61,7 @@ int	main(void)
 			std::cout << abc << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cout << e.what() << std::endl << std::endl;
+			std::cout << "catch: " << e.what() << std::endl << std::endl;
 		}
 	std::cout << "-------------" << std::endl;
 	}
@@ -72,13 +72,13 @@ int	main(void)
 			Form	abc("abc", 50, 50);
 			tom.signForm(abc);
 			std::cout << abc << std::endl;
-
+			std::cout << "-------------" << std::endl;
 			Form	qwe("qwe", 49, 49);
 			std::cout << qwe << std::endl;
 			tom.signForm(qwe);
 		}
 		catch (const std::exception& e) {
-			std::cout << e.what() << std::endl << std::endl;
+			std::cout << "catch: " << e.what() << std::endl << std::endl;
 		}
 	std::cout << "-------------" << std::endl;
 	}

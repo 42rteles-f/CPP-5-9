@@ -8,29 +8,21 @@ Exercise about errors and inheritance.
 */
 int	main(void)
 {
-	Bureaucrat	tom("Tom");
+	Bureaucrat	tom("Tom", 150);
 
 	std::cout << "--------------\nTest Shruberry\n--------------" << std::endl;
 	{
 		try {
-			std::cout << "Test not signed." << std::endl;
 			ShrubberyCreationForm tree("amazon");
 			std::cout << tree << std::endl;
-			tree.execute(tom);
-			tom.setGrade(50);
+			tom.executeForm(tree);
 			tom.signForm(tree);
-		}
-		catch (std::exception& e) {
-			std::cout << "catched: ";
-			std::cout << e.what() << std::endl;
-		}
-		try {
-			std::cout << "\nTest signed." << std::endl;
-			ShrubberyCreationForm tree("amazon");
-			std::cout << tree << std::endl;
-			tom.setGrade(50);
+			tom.setGrade(1);
 			tom.signForm(tree);
-			tree.execute(tom);
+			tom.setGrade(150);
+			tom.executeForm(tree);
+			tom.setGrade(1);
+			tom.executeForm(tree);
 		}
 		catch (std::exception& e) {
 			std::cout << "catched: ";
@@ -41,24 +33,11 @@ int	main(void)
 	std::cout << "\n\n--------------\nTest Robotomy\n--------------" << std::endl;
 	{
 		try {
-			std::cout << "Test not signed." << std::endl;
 			RobotomyRequestForm suspect("Suspect");
 			std::cout << suspect << std::endl;
-			suspect.execute(tom);
-			tom.setGrade(50);
+			tom.executeForm(suspect);
 			tom.signForm(suspect);
-		}
-		catch (std::exception& e) {
-			std::cout << "catched: ";
-			std::cout << e.what() << std::endl;
-		}
-		try {
-			std::cout << "\nTest signed." << std::endl;
-			RobotomyRequestForm suspect("Suspect");
-			std::cout << suspect << std::endl;
-			tom.setGrade(50);
-			tom.signForm(suspect);
-			suspect.execute(tom);
+			tom.executeForm(suspect);
 		}
 		catch (std::exception& e) {
 			std::cout << "catched: ";
@@ -69,30 +48,16 @@ int	main(void)
 	std::cout << "\n\n--------------\nTest Presidential\n--------------" << std::endl;
 	{
 		try {
-			std::cout << "Test not signed." << std::endl;
 			PresidentialPardonForm khan("Genghis");
 			std::cout << khan << std::endl;
-			khan.execute(tom);
-			tom.setGrade(50);
+			tom.executeForm(khan);
 			tom.signForm(khan);
-		}
-		catch (std::exception& e) {
-			std::cout << "catched: ";
-			std::cout << e.what() << std::endl;
-		}
-		try {
-			std::cout << "\nTest signed." << std::endl;
-			PresidentialPardonForm khan("Genghis");
-			std::cout << khan << std::endl;
-			tom.setGrade(1);
-			tom.signForm(khan);
-			khan.execute(tom);
+			tom.executeForm(khan);
 		}
 		catch (std::exception& e) {
 			std::cout << "catched: ";
 			std::cout << e.what() << std::endl;
 		}
 	}
-
 
 }

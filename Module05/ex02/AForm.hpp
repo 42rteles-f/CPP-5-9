@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/13 18:06:55 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:24:17 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class AForm {
 		bool 			isSigned() const;
 		void 			beSigned(const Bureaucrat& obj);
 		int				isValidGrade(int grade) const;
-		virtual void	execute(Bureaucrat const & executor) = 0;
+		virtual void	execute(Bureaucrat const & executor) const = 0;
 
 		class GradeTooLowException: public std::exception {
 			public:

@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:13 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/20 19:04:41 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:02:01 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ _name(""), _grade(150)
 Bureaucrat::Bureaucrat(std::string name):
 _name(name), _grade(150)
 { std::cout << "Bureaucrat Default Constructor called." << std::endl; }
+
+Bureaucrat::Bureaucrat(std::string name, int grade):
+_name(name)
+{
+	setGrade(grade);
+	std::cout << "Bureaucrat Default Constructor called." << std::endl;
+}
 
 Bureaucrat::Bureaucrat(const Bureaucrat& tocopy)
 {
@@ -74,6 +81,16 @@ void	Bureaucrat::signForm(AForm& form) const {
 	}
 	catch (const std::exception& e) {
 		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(AForm const & form) {
+	try {
+		form.execute(*this);
+		std::cout << _name << " Executed " << form.getName() << std::endl;
+	}
+	catch (const std::exception& e) {
+		std::cout << _name << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
 	}
 }
 
