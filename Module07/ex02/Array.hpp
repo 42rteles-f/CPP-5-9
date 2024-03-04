@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/04 21:06:16 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/04 21:39:27 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ class Array {
 		Array(unsigned int n):
 			_array(new T[n]()), _size(n) {};
 		Array(const Array& tocopy) {
+			_array = NULL;
+			_size = 0;
 			*this = tocopy;
 		};
 		~Array() {
