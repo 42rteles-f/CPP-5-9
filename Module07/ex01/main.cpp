@@ -23,6 +23,7 @@ void	classPrint(Test& print) {
 	std::cout << print.name;
 }
 
+//Introduction to Template Manipulation.
 int	main(void)
 {
 	int		int_a[5] = {1, 2, 3, 4, 5};

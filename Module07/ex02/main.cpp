@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Array.hpp"
 
+// Introduction to Template Classes.
 int	main(void)
 {
 	Array<int>	test(10);

@@ -1,6 +1,7 @@
 #include "whatever.hpp"
 #include <iostream>
 
+// Introduction to Template Functions
 int main( void )
 {
 	int a = 2;
