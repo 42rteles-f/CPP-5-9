@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:12:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/21 18:57:58 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:03:56 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const & executor)
+void	PresidentialPardonForm::action(void) const
 {
-	if (!this->isSigned())
-		throw FormNotSigned();
-	else if (executor.getGrade() >  this->getGradeExec())
-		throw GradeTooLowException();
-
 	std::cout << _target << " has been Pardoned by Zaphod Beeblebrox" << std::endl;
 }

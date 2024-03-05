@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:10:58 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/21 19:25:40 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:03:51 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 
 class PresidentialPardonForm: public AForm {
 	private:
-		std::string					_target;
+		std::string	_target;
+
+		void		action(void) const;
+
 	public:
 		PresidentialPardonForm();
 		PresidentialPardonForm(std::string target);
@@ -30,8 +33,6 @@ class PresidentialPardonForm: public AForm {
 		~PresidentialPardonForm();
 
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& tocopy);
-
-		virtual void	execute(Bureaucrat const & executor) const;
 } ;
 
 #endif

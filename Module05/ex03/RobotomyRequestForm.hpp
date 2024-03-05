@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/20 19:54:57 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:03:17 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 
 class RobotomyRequestForm: public AForm {
 	private:
-		std::string					_target;
+		std::string	_target;
+
+		void		action(void) const;
+
 	public:
 		RobotomyRequestForm();
 		RobotomyRequestForm(std::string target);
@@ -30,8 +33,6 @@ class RobotomyRequestForm: public AForm {
 		~RobotomyRequestForm();
 
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& tocopy);
-
-		virtual void	execute(Bureaucrat const & executor);
 } ;
 
 #endif

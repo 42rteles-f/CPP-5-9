@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:16 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/04 17:16:02 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:19:24 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ class Serializer {
 		Serializer();
 		Serializer(const Serializer& tocopy);
 		~Serializer();
-
 		Serializer& operator=(const Serializer& tocopy);
 
 	public:

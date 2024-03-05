@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:13 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/24 16:42:23 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:39:34 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ _name("John"), _grade(150)
 { std::cout << "Bureaucrat Default Constructor called." << std::endl; }
 
 Bureaucrat::Bureaucrat(std::string name, int grade):
-_name(name)
+_name(name), _grade(150)
 {
 	setGrade(grade);
 	std::cout << "Bureaucrat Default Constructor called." << std::endl;

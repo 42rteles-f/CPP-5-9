@@ -20,7 +20,7 @@ void	testFunction(Test& change) {
 }
 
 void	classPrint(Test& print) {
-	std::cout << print.name;
+	std::cout << print.name << ".";
 }
 
 //Introduction to Template Manipulation.

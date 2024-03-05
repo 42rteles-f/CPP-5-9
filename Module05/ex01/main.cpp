@@ -10,7 +10,6 @@ int	main(void)
 {
 	Bureaucrat	tom("Tom", 50);
 
-	tom.setGrade(50);
 	{
 		std::cout << "Invalid Sign Grade test" << std::endl;
 		try {
@@ -70,6 +69,7 @@ int	main(void)
 		std::cout << "Sign test" << std::endl;
 		try {
 			Form	abc("abc", 50, 50);
+			std::cout << abc << std::endl;
 			tom.signForm(abc);
 			std::cout << abc << std::endl;
 			std::cout << "-------------" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:30:13 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/02/20 17:39:26 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:58:56 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	isOverflow(std::string str, int type) {
 		return (true);
 	if (type == FLOAT && (number > FLT_MAX || number < FLT_MIN))
 		return (true);
-	if (type == DOUBLE && (number > DBL_MAX || number < DBL_MIN))
+	if (type == DOUBLE && (number > DBL_MAX || number < -DBL_MAX))
 		return (true);
 	return (false);
 }
@@ -76,7 +76,7 @@ int inputType(const std::string& str)
 {
 	if (str.empty())
 		return (IMPOSSIBLE);
-	if (str.size() == 1)
+	if (str.size() == 1 && !std::isdigit(str[0]))
 		return (isOverflow(str, CHAR) ? OVERFLOW : CHAR);
 	if (isInt(str))
 		return (isOverflow(str, INT) ? OVERFLOW : INT);

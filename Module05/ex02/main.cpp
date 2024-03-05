@@ -23,6 +23,7 @@ int	main(void)
 			tom.executeForm(tree);
 			tom.setGrade(1);
 			tom.executeForm(tree);
+			tom.setGrade(150);
 		}
 		catch (std::exception& e) {
 			std::cout << "catched: ";
@@ -37,7 +38,13 @@ int	main(void)
 			std::cout << suspect << std::endl;
 			tom.executeForm(suspect);
 			tom.signForm(suspect);
+			tom.setGrade(1);
+			tom.signForm(suspect);
+			tom.setGrade(150);
 			tom.executeForm(suspect);
+			tom.setGrade(1);
+			tom.executeForm(suspect);
+			tom.setGrade(150);
 		}
 		catch (std::exception& e) {
 			std::cout << "catched: ";
@@ -48,11 +55,16 @@ int	main(void)
 	std::cout << "\n\n--------------\nTest Presidential\n--------------" << std::endl;
 	{
 		try {
-			PresidentialPardonForm khan("Genghis");
-			std::cout << khan << std::endl;
-			tom.executeForm(khan);
-			tom.signForm(khan);
-			tom.executeForm(khan);
+			PresidentialPardonForm genghis("Khan");
+			std::cout << genghis << std::endl;
+			tom.executeForm(genghis);
+			tom.signForm(genghis);
+			tom.setGrade(1);
+			tom.signForm(genghis);
+			tom.setGrade(150);
+			tom.executeForm(genghis);
+			tom.setGrade(1);
+			tom.executeForm(genghis);
 		}
 		catch (std::exception& e) {
 			std::cout << "catched: ";

@@ -81,6 +81,15 @@ int	AForm::isValidGrade(int grade) const {
 	return (grade);
 }
 
+void	AForm::execute(Bureaucrat const & executor) const {
+	if (!this->isSigned())
+		throw FormNotSigned();
+	else if (executor.getGrade() > this->getGradeExec())
+		throw GradeTooLowException();
+	action();
+}
+
+
 const char* AForm::GradeTooLowException::what() const throw() {
 	return ("Grade Too Low.");
 }
