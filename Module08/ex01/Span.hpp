@@ -32,6 +32,8 @@ class Span {
 		Span&	operator=(Span& tocopy);
 
 		void	addNumber(const int number);
+		void	addNumber(std::vector<int>::iterator start,
+							std::vector<int>::iterator end);
 		int		shortestSpan(void);
 		int		longestSpan(void);
 } ;
@@ -43,7 +45,6 @@ _max(INT_MIN), _min(INT_MAX), _limit(0), _added(0), _short(INT_MAX)
 Span::Span(unsigned int N):
 _max(INT_MIN), _min(INT_MAX), _limit(N), _added(0), _short(INT_MAX)
 {}
-
 
 Span::~Span() {}
 
@@ -65,6 +66,13 @@ void	Span::updateLong(const int number) {
 	_long = _max - _min;
 }
 
+void	Span::addNumber(std::vector<int>::iterator start, std::vector<int>::iterator end) {
+	while (start != end) {
+		try { addNumber(*start); } catch (...) { throw; }
+		start++;
+	}
+}
+
 void	Span::addNumber(const int number) {
 	if (_added == _limit)
 		throw std::runtime_error("Span is Full.");
@@ -73,6 +81,7 @@ void	Span::addNumber(const int number) {
 	updateLong(number);
 	_numbers.push_back(number);
 }
+
 
 int		Span::shortestSpan(void) {
 	if (_numbers.size() < 2)
@@ -85,6 +94,5 @@ int		Span::longestSpan(void) {
 		throw std::runtime_error("Not enough numbers for a Span.");
 	return (_long);
 }
-
 
 #endif
