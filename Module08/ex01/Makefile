@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= 	Bureaucrat
+NAME		= 	Span
 
 CC			= 	c++ #-g -fsanitize=address
 
@@ -20,7 +20,7 @@ RM			= 	rm -f
 
 INCLUDES	= 	-I
 
-SRCS		=	main.cpp Bureaucrat.cpp
+SRCS		=	main.cpp Span.cpp
 
 OBJS		= 	$(SRCS:.cpp=.o)
 

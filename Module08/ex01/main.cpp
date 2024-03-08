@@ -1,7 +1,4 @@
 #include "Span.hpp"
-#include <stack>
-
-
 
 int	main(void)
 {
@@ -27,5 +24,4 @@ int	main(void)
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
 	}
-	std::stack<int>	asd;
 }
