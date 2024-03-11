@@ -23,9 +23,17 @@ void	classPrint(Test& print) {
 	std::cout << print.name << ".";
 }
 
+template<typename T>
+void	test2(T here){
+	(void)here;
+}
+
 //Introduction to Template Manipulation.
 int	main(void)
 {
+	int	test[] = {1,2,3,4,5};
+
+	iter(test, 5, test2<const int>);
 	int		int_a[5] = {1, 2, 3, 4, 5};
 	char	char_a[11] = "helloworld";
 	Test	test_a[15];

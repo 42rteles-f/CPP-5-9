@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/11 16:18:24 by rteles-f          #+#    #+#             */
+/*   Updated: 2024/03/11 16:18:24 by rteles-f         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Span.hpp"
 
 Span::Span():
@@ -25,7 +37,6 @@ Span&	Span::operator=(const Span& tocopy) {
 	_numbers = tocopy._numbers;
 	return (*this);
 }
-
 
 void	Span::updateShort(const int number) {
 	int	difference = 0;
