@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "./*",
-                "./*/*"
+                "./*/*",
+                "/usr/lib/x86_64-linux-gnu/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -12,8 +13,8 @@
                 "_UNICODE"
             ],
             "cppStandard": "c++98",
-            "intelliSenseMode": "windows-gcc-x86",
-            "compilerPath": "C:/MinGW/bin/g++.exe"
+            "intelliSenseMode": "linux-gcc-x86",
+            "compilerPath": "/usr/bin/g++"
         }
     ],
     "version": 4

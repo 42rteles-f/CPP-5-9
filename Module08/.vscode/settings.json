@@ -1,22 +1,20 @@
 {
-	"files.associations": {
-		"*.tcc": "cpp",
-		"deque": "cpp",
-		"list": "cpp",
-		"string": "cpp",
-		"vector": "cpp",
-		"memory": "cpp",
-		"streambuf": "cpp",
-		"atomic": "cpp",
-		"unordered_map": "cpp",
-		"functional": "cpp",
-		"iterator": "cpp",
-		"memory_resource": "cpp",
-		"fstream": "cpp",
-		"istream": "cpp",
-		"ostream": "cpp",
-		"sstream": "cpp",
-		"system_error": "cpp",
-		"tuple": "cpp"
-	}
+    "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "iomanip": "cpp",
+        "*.tcc": "cpp",
+        "cstdint": "cpp",
+        "exception": "cpp"
+    },
+	"terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "/usr/bin/env",
+            "args": ["--", "flatpak-spawn", "--host", "--env=TERM=xterm-256color", "zsh"]
+        },
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.env.linux": {
+        "LD_PRELOAD": null,
+    },
 }
