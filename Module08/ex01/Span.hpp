@@ -25,8 +25,6 @@ class Span {
 	private:
 		int					_max;
 		int					_min;
-		const int			_limit;
-		int					_added;
 		int					_short;
 		int					_long;
 		std::vector<int>	_numbers;

@@ -13,15 +13,16 @@
 #include "Span.hpp"
 
 Span::Span():
-_max(INT_MIN), _min(INT_MAX), _limit(0), _added(0), _short(INT_MAX)
+_max(INT_MIN), _min(INT_MAX), _short(INT_MAX)
 {}
 
 Span::Span(unsigned int N):
-_max(INT_MIN), _min(INT_MAX), _limit(N), _added(0), _short(INT_MAX)
-{}
+_max(INT_MIN), _min(INT_MAX), _short(INT_MAX)
+{
+	_numbers.reserve(N);
+}
 
-Span::Span(Span& tocopy):
-_limit(tocopy._limit)
+Span::Span(Span& tocopy)
 {
 	*this = tocopy;
 }
@@ -29,11 +30,11 @@ _limit(tocopy._limit)
 Span::~Span() {}
 
 Span&	Span::operator=(const Span& tocopy) {
+	_numbers.resize(tocopy._numbers.capacity());
 	_max = tocopy._max;
 	_min = tocopy._min;
 	_short = tocopy._short;
 	_long = tocopy._long;
-	_added = tocopy._added;
 	_numbers = tocopy._numbers;
 	return (*this);
 }
@@ -64,9 +65,8 @@ void	Span::addNumber(std::vector<int>::iterator start, std::vector<int>::iterato
 }
 
 void	Span::addNumber(const int number) {
-	if (_added == _limit)
+	if (_numbers.size() >= _numbers.capacity())
 		throw std::runtime_error("Span is Full.");
-	_added++;
 	updateShort(number); 
 	updateLong(number);
 	_numbers.push_back(number);
