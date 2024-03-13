@@ -26,6 +26,13 @@ int	main(void)
 	test.addNumber(101);
 	std::cout << "short: " << test.shortestSpan() << std::endl;
 	std::cout << "long: " << test.longestSpan() << std::endl;
+	try {
+		for (int i = 0; i < 50; i++)
+			test.addNumber(i);
+	}
+	catch (std::exception& event) {
+		std::cout << event.what() << std::endl;	
+	}
 	{
 		Span sp = Span(5);
 		sp.addNumber(6);

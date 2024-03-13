@@ -65,6 +65,7 @@ void	Span::addNumber(std::vector<int>::iterator start, std::vector<int>::iterato
 }
 
 void	Span::addNumber(const int number) {
+	// std::cout << "size " << _numbers.size() << std::endl;
 	if (_numbers.size() >= _numbers.capacity())
 		throw std::runtime_error("Span is Full.");
 	updateShort(number); 
@@ -73,13 +74,13 @@ void	Span::addNumber(const int number) {
 }
 
 
-int		Span::shortestSpan(void) {
+int		Span::shortestSpan(void) const {
 	if (_numbers.size() < 2)
 		throw std::runtime_error("Not enough numbers for a Span.");
 	return (_short);
 }
 
-int		Span::longestSpan(void) {
+int		Span::longestSpan(void) const {
 	if (_numbers.size() < 2)
 		throw std::runtime_error("Not enough numbers for a Span.");
 	return (_long);
