@@ -16,13 +16,13 @@ Span::Span():
 _max(INT_MIN), _min(INT_MAX), _short(INT_MAX)
 {}
 
-Span::Span(unsigned int N):
+Span::Span(const unsigned int N):
 _max(INT_MIN), _min(INT_MAX), _short(INT_MAX)
 {
 	_numbers.reserve(N);
 }
 
-Span::Span(Span& tocopy)
+Span::Span(const Span& tocopy)
 {
 	*this = tocopy;
 }

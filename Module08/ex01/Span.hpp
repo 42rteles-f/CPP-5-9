@@ -35,8 +35,8 @@ class Span {
 		void	updateLong(const int number);
 
 	public:
-		Span(Span& tocopy);
-		Span(unsigned int N);
+		Span(const Span& tocopy);
+		Span(const unsigned int N);
 		~Span();
 
 		Span&	operator=(const Span& tocopy);
