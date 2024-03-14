@@ -6,7 +6,7 @@
 #    By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 20:08:19 by rteles-f          #+#    #+#              #
-#    Updated: 2024/03/13 19:52:17 by rteles-f         ###   ########.fr        #
+#    Updated: 2024/03/14 20:54:55 by rteles-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM			= 	rm -f
 
 INCLUDES	= 	-I
 
-SRCS		=	main.cpp DataBase.cpp
+SRCS		=	main.cpp BitcoinExchange.cpp
 
 OBJS		= 	$(SRCS:.cpp=.o)
 

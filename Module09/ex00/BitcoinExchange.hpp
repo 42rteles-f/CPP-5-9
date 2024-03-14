@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DataBase.hpp                                       :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:20:17 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/13 23:05:47 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/14 22:28:52 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
 
 # include <iostream>
 # include <algorithm>
@@ -19,27 +19,37 @@
 # include <map>
 # include <string>
 # include <fstream>
+# include <sstream> 
 
-class DataBase {
+typedef struct s_bitdate {
+	int	year;
+	int	month;
+	int	day;
+} t_bitdate;
+
+class BitcoinExchange {
 	private:
 		const	std::string		PATH;
 		const	char			SEPARATOR;
-		std::deque<std::string>	date;
-		std::deque<std::string>	value;
 		std::map<std::string, std::string>	data;
 
-		DataBase();
-		DataBase(const DataBase& copy);
+		BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange& copy);
 
-		void	loadFile(std::string file);
+		void	loadFile();
+		bool	validValue(std::string line);
+		bool	leapYear(int year);
+		bool	validDay(t_bitdate date);
+		bool	validDate(std::string line);
 
 	public:
-		DataBase(std::string file, char separator);
-		~DataBase();
+		BitcoinExchange(std::string file, char separator);
+		~BitcoinExchange();
 
-		DataBase&   operator=(const DataBase& copy);
+		BitcoinExchange&   operator=(const BitcoinExchange& copy);
+		BitcoinExchange&   operator>>(const BitcoinExchange& copy);
 
 		std::string	getValue(std::string date) const;
-}
+} ;
 
 #endif
