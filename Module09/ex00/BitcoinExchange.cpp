@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:30:35 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/15 16:53:37 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:36:12 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,43 +73,50 @@ bool	BitcoinExchange::validValue(std::string line) {
 		throw std::runtime_error("Error: impossibble convergion.");
     if (value < 0.0)
 		throw std::runtime_error("Error: not a positive number.");
-	if (separator == AMOUNT &&  value > 1000.0)
+	if (value > 1000.0)
 		throw std::runtime_error("Error: too large number.");
     return (true);
 }
 
-void    BitcoinExchange::loadFile(void) {
-	std::ifstream   file;
+std::pair<std::string, std::string>	BitcoinExchange::lineToPair(std::ifstream& file, int separator) {
+
 	std::string		line;
 	size_t			pos;
+
+	if (!std::getline(file, line))
+		return (std::make_pair("", ""));
+	pos = line.find(separator);
+	return (std::make_pair(line.substr(0, pos), line.substr(pos + 1)));
+}
+
+void    BitcoinExchange::loadFile(void) {
+	std::ifstream   file;
+	std::pair<std::string, std::string>	it;
 
 	file.open(this->path.c_str());
 	if (!file.is_open())
 		throw std::runtime_error("Error: could not open file.");
 
-	while (std::getline(file, line))
-	{
-		pos = line.find(this->separator);
-		if (pos == line.npos || line.find(this->separator, pos + 1) != line.npos)
-			throw std::runtime_error(std::string("Error: ") + path + " incorrect format.");
-		if (!data.insert(std::make_pair(line.substr(0, pos), line.substr(pos + 1))).second)
-			throw std::runtime_error(std::string("Error: ") + path + " repeating date.");
+	while (file.is_open()) {
+		it = lineToPair(file, separator);
+		if (it.first.length())
+			data.insert(it);
+		else
+			file.close();
 	}
 }
 
 void    BitcoinExchange::initDataBase(std::string file, char separtor) {
 	this->path = file;
 	this->separator = separtor;
-	loadFile();
+	try { loadFile(); } catch (...) { throw; };
 }
 
 std::string    BitcoinExchange::getValue(std::string date) const {
+
 	std::map<std::string, std::string>::const_iterator	closer;
 
-	closer = data.begin();
-	while (closer != data.end() && (*closer).first != date) {
-		closer++;
-	}
+	closer = data.find(date);
 	if (closer == data.end()) {
 		closer--;
 		closer--;
@@ -117,61 +124,29 @@ std::string    BitcoinExchange::getValue(std::string date) const {
 	return ((*closer).second);
 }
 
-// void    BitcoinExchange::worthByDate(std::string file) {
+void    BitcoinExchange::worthByDate(std::string path, int separator) {
 
-// 	std::map<std::string, std::string>::iterator	it;
-// 	std::string	rate;
-// 	std::pair<std::string, std::string>	line;
-// 	std::string	line;
-// 	double		value;
+	std::pair<std::string, std::string>	log;
+	std::ifstream	file;
+	std::string		rate;
+	double			value;
 
-// 	while (std::getline(line)) {
-// 		try {
-// 			(validDate((*it).first)) && (validValue((*it).second));
-// 			rate.clear();
-// 			rate = date.getValue((*it).first);
-// 			value = std::atof((*it).second.c_str()) * std::atof(rate.c_str());
-// 			std::cout	<< (*it).first << " => "
-// 						<< (*it).second << " = "
-// 						<< value
-// 						<< std::endl;
-// 		}
-// 		catch (std::exception& e) {
-// 			std::cout << e.what() << std::endl;
-// 		}
-// 		it++;
-// 	}
-// }
-
-void    BitcoinExchange::worthByDate(BitcoinExchange& date) {
-
-	std::map<std::string, std::string>::iterator	it;
-	std::string	rate;
-	double		value;
-
-	it = data.begin();
-	while (it != data.end()) {
+	file.open(path.c_str());
+	if (!file.is_open())
+		throw std::runtime_error("Error: could not open file.");
+	std::getline(file, rate);
+	log = lineToPair(file, separator);
+	while (log.first.length()) {
 		try {
-			(validDate((*it).first)) && (validValue((*it).second));
-			rate.clear();
-			rate = date.getValue((*it).first);
-			value = std::atof((*it).second.c_str()) * std::atof(rate.c_str());
-			std::cout	<< (*it).first << "=>"
-						<< (*it).second << " = "
-						<< value
-						<< std::endl;
+			if (validDate(log.first) && validValue(log.second))
+				rate = getValue(log.first);
+			value = std::atof(log.second.c_str()) * std::atof(rate.c_str());
+			std::cout << log.first << "=>" << log.second << " = "
+				<< value << std::endl;
 		}
 		catch (std::exception& e) {
 			std::cout << e.what() << std::endl;
 		}
-		it++;
+		log = lineToPair(file, separator);
 	}
 }
-
-		// data.insert(std::make_pair(line.substr(0, pos), line.substr(pos + 1)));
-		// std::cout	<< "key: " << (*it).first
-		// 			<< " value: " << (*it).second << std::endl;
-
-// std::string	BitcoinExchange::getValue(std::string date) {
-// 	while (get)
-// }

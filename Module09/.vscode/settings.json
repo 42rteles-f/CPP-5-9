@@ -5,7 +5,8 @@
         "iomanip": "cpp",
         "*.tcc": "cpp",
         "cstdint": "cpp",
-        "exception": "cpp"
+        "exception": "cpp",
+        "iosfwd": "cpp"
     },
 	"terminal.integrated.profiles.linux": {
         "zsh": {
