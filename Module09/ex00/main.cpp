@@ -19,10 +19,14 @@ int main(int ac, char **av)
 		std::cerr << "Error: could not open file." << std::endl;
 		return (1);
 	}
+	(void)av;
+	BitcoinExchange	csv;
+	BitcoinExchange	input;
 	try {
-		BitcoinExchange	csv("data.csv", ',');
-		BitcoinExchange	input(av[1], '|');
-		csv << input;
+		input.initDataBase(av[1], '|');
+		csv.initDataBase("data.csv", ',');
+		// csv.worthByDate(av[1]);
+		input.worthByDate(csv);
 	}
 	catch (std::exception& event) {
 		std::cout << event.what() << std::endl;
