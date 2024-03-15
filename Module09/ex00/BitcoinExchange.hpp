@@ -21,6 +21,11 @@
 # include <fstream>
 # include <sstream> 
 
+enum {
+	RATE = ',',
+	AMOUNT = '|'
+} ;
+
 typedef struct s_bitdate {
 	int	year;
 	int	month;
@@ -29,27 +34,31 @@ typedef struct s_bitdate {
 
 class BitcoinExchange {
 	private:
-		const	std::string		PATH;
-		const	char			SEPARATOR;
+		std::string							path;
+		char								separator;
 		std::map<std::string, std::string>	data;
 
-		BitcoinExchange();
-		BitcoinExchange(const BitcoinExchange& copy);
 
-		void	loadFile();
-		bool	validValue(std::string line);
-		bool	leapYear(int year);
-		bool	validDay(t_bitdate date);
-		bool	validDate(std::string line);
+		void		loadFile();
+		bool		validValue(std::string line);
+		bool		leapYear(int year);
+		bool		validDay(t_bitdate date);
+		bool		validDate(std::string line);
+		std::string	getValue(std::string date) const;
 
 	public:
+		BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange& copy);
 		BitcoinExchange(std::string file, char separator);
 		~BitcoinExchange();
 
 		BitcoinExchange&   operator=(const BitcoinExchange& copy);
-		BitcoinExchange&   operator>>(const BitcoinExchange& copy);
+		// BitcoinExchange&   operator>>(const BitcoinExchange& copy);
 
-		std::string	getValue(std::string date) const;
+		void    worthByDate(BitcoinExchange& dates);
+		void    worthByDate(std::string file);
+		void    initDataBase(std::string file, char separtor);
+
 } ;
 
 #endif
