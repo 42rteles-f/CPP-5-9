@@ -10,7 +10,7 @@ class RPN {
 	private:
 		std::stack<int>	expression;
 
-		bool	loadExpression(std::string expression);
+		void	loadExpression(std::string expression);
 		bool	isOperation(int input);
 		int		RPN::getOperation(void);
 		int		RPN::takeTop(void);
