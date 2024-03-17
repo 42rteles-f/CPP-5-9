@@ -12,7 +12,7 @@ RPN::~RPN() {}
 
 RPN&	RPN::operator=(RPN& copy) { (void)copy; return (*this); }
 
-void	RPN::solveOperation(int operation)
+bool	RPN::solveOperation(int operation)
 {
 	double	first, second;
 	int		result;
@@ -21,11 +21,14 @@ void	RPN::solveOperation(int operation)
 	expression.pop();
 	second = expression.top();
 	expression.pop();
-	if (operation == '*' || operation == '/')
+	if (operation == '*' || (operation == '/' && first))
 		result = second * (operation == '*' ? first : (1.0 / first));
-	else
+	else if (operation == '+' || operation == '-')
 		result = second + (operation == '+' ? first : -first);
+	else
+		return (false);
 	expression.push(result);
+	return (true);
 }
 
 bool	RPN::calculate(std::string input) {
@@ -36,17 +39,11 @@ bool	RPN::calculate(std::string input) {
 	{
 		while (iss >> piece && piece.length() == 1 && std::isdigit(piece[0]))
 			expression.push(piece[0] - '0');
-		if (expression.size() < 2 || !isOperation(piece)) {
+		if (expression.size() < 2 || piece.length() != 1 || !solveOperation(piece[0])) {
 			std::cout << "Error" << std::endl;
 			return (false);
 		}
-		solveOperation(piece[0]);
 	}
 	std::cout << expression.top() << std::endl;
 	return (true);
-}
-
-bool	RPN::isOperation(std::string input) {
-	return (((input.length() == 1)
-		&& (input[0] == '+' || input[0] == '-' || input[0] == '*' || input[0] == '/')));
 }
