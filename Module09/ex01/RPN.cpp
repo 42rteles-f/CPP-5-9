@@ -14,7 +14,7 @@ RPN&	RPN::operator=(RPN& copy) { (void)copy; return (*this); }
 
 bool	RPN::solveOperation(int operation)
 {
-	double	first, second;
+	float	first, second;
 	int		result;
 
 	first = expression.top();
