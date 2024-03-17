@@ -39,6 +39,7 @@ bool	RPN::calculate(std::string input) {
 
 	while (!iss.eof())
 	{
+		piece.clear();
 		while (iss >> piece && piece.length() == 1 && std::isdigit(piece[0]))
 			expression.push(piece[0] - '0');
 		if (expression.size() < 2 || piece.length() != 1 || !solveOperation(piece[0])
