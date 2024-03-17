@@ -6,24 +6,22 @@
 # include <fstream>
 # include <sstream> 
 
+# define ERROR 10
+
 class RPN {
 	private:
-		std::stack<int>	expression;
+		static std::stack<int>	expression;
 
-		void	loadExpression(std::string expression);
-		bool	isOperation(int input);
-		int		RPN::getOperation(void);
-		int		RPN::takeTop(void);
-		int		RPN::checkTop(void);
-
-
-	public:
+		static bool	isOperation(std::string input);
+		static void	solveOperation(int operation);
+		static int		takeTop(void);
 		RPN();
+		RPN(std::string);
 		RPN(RPN& copy);
 		~RPN();
-
 		RPN&	operator=(RPN& copy);
 
-		void	calculate(std::string expression);
+	public:
+		static bool	calculate(std::string expression);
 } ;
 
