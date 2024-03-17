@@ -10,7 +10,9 @@ RPN::RPN(RPN& copy) {
 
 RPN::~RPN() {}
 
-RPN&	RPN::operator=(RPN& copy) { (void)copy; return (*this); }
+RPN&	RPN::operator=(RPN& copy) {
+	(void)copy; return (*this);
+}
 
 bool	RPN::solveOperation(int operation)
 {
@@ -39,7 +41,8 @@ bool	RPN::calculate(std::string input) {
 	{
 		while (iss >> piece && piece.length() == 1 && std::isdigit(piece[0]))
 			expression.push(piece[0] - '0');
-		if (expression.size() < 2 || piece.length() != 1 || !solveOperation(piece[0])) {
+		if (expression.size() < 2 || piece.length() != 1 || !solveOperation(piece[0])
+			|| (iss.eof() && expression.size() != 1)) {
 			std::cout << "Error" << std::endl;
 			return (false);
 		}
