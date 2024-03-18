@@ -35,16 +35,26 @@ bool	RPN::solveOperation(std::string operation)
 	return (true);
 }
 
+/*
+	The loop will transfer the splitted input in to the token variable.
+	First it will try to pass all numbers it encounters into the stack.
+	Once it finds something that is not a valid number, it must be a operator.
+	If the string exists and the operation failed, theres something wrong with either
+the operation or the input.
+	if there is no string, meaning its the end of the input, and the expression has more than one number left,
+that means the input is wrong.
+*/
 bool	RPN::calculate(std::string input) {
 	std::istringstream	iss(input);
-	std::string			token;
+	std::string			token = "start";
 
 	while (!iss.eof())
 	{
 		token.clear();
 		while (iss >> token && token.length() == 1 && std::isdigit(token[0]))
 			expression.push(token[0] - '0');
-		if (!token.empty() && !solveOperation(token)) {
+		if ((!token.empty() && !solveOperation(token))
+			|| (token.empty() && expression.size() != 1)) {
 			std::cout << "Error" << std::endl;
 			return (false);
 		}
