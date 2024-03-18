@@ -17,7 +17,7 @@ class RPN {
 
 		RPN&	operator=(RPN& copy);
 
-		static bool	solveOperation(int operation);
+		static bool	solveOperation(std::string operation);
 
 	public:
 		static bool	calculate(std::string expression);

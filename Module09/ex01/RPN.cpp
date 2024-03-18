@@ -14,19 +14,21 @@ RPN&	RPN::operator=(RPN& copy) {
 	(void)copy; return (*this);
 }
 
-bool	RPN::solveOperation(int operation)
+bool	RPN::solveOperation(std::string operation)
 {
 	float	first, second;
 	int		result;
 
+	if (expression.size() < 2)
+		return (false);
 	first = expression.top();
 	expression.pop();
 	second = expression.top();
 	expression.pop();
-	if (operation == '*' || (operation == '/' && first))
-		result = second * (operation == '*' ? first : (1.0 / first));
-	else if (operation == '+' || operation == '-')
-		result = second + (operation == '+' ? first : -first);
+	if (operation == "*" || (operation == "/" && first))
+		result = second * (operation == "*" ? first : (1.0 / first));
+	else if (operation == "+" || operation == "-")
+		result = second + (operation == "+" ? first : -first);
 	else
 		return (false);
 	expression.push(result);
@@ -35,15 +37,14 @@ bool	RPN::solveOperation(int operation)
 
 bool	RPN::calculate(std::string input) {
 	std::istringstream	iss(input);
-	std::string			piece;
+	std::string			token;
 
 	while (!iss.eof())
 	{
-		piece.clear();
-		while (iss >> piece && piece.length() == 1 && std::isdigit(piece[0]))
-			expression.push(piece[0] - '0');
-		if (expression.size() < 2 || piece.length() != 1 || !solveOperation(piece[0])
-			|| (iss.eof() && expression.size() != 1)) {
+		token.clear();
+		while (iss >> token && token.length() == 1 && std::isdigit(token[0]))
+			expression.push(token[0] - '0');
+		if (!token.empty() && !solveOperation(token)) {
 			std::cout << "Error" << std::endl;
 			return (false);
 		}
