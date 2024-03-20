@@ -47,17 +47,17 @@ bool	BitcoinExchange::validDay(t_bitdate date) {
 		limit = 28 + leapYear(date.year);
 	else
 		limit = 30 + ((date.month > 7) ? ((date.month - 7) % 2) : (date.month % 2));
-	if ((date.day > 0 && date.day <= limit))
-		return (true);
-	return (false);
+	if ((date.day < 0 || date.day > limit))
+		return (false);
+	return (true);
 }
 
 bool	BitcoinExchange::validDate(std::string line) {
 	t_bitdate	date;
 	char		end;
 
-	if (std::sscanf(line.c_str(), "%d-%d-%d%c",
-			&date.year, &date.month, &date.day, &end) != 4
+	if (std::sscanf(line.c_str(), "%d-%d-%d %c",
+			&date.year, &date.month, &date.day, &end) != 3
 			|| date.year < 0 || date.month < 0 || date.month > 12
 			|| !validDay(date))
 		throw std::runtime_error(std::string("Error: bad input => ") + line);

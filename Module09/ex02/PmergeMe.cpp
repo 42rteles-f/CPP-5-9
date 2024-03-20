@@ -26,28 +26,18 @@ void	PmergeMe::insertionSort(T begin, T end, t_exe swap) {
 	}
 }
 
-void	PmergeMe::makePairs() {
-	std::list<int>::iterator first = _list.begin();
-	std::list<int>::iterator take = _list.begin();
-	std::list<int>::iterator second = _list.begin();
-	std::list<int>					smaller;
-	std::list<int>					bigger;
-	std::list<int>					probe;
+void	PmergeMe::insertionSort(std::list<int> list) {
+	std::list<int>::iterator	first = _list.begin();
+	std::list<int>::iterator	second = _list.begin();
+	std::list<int>				smaller;
 
 	second++;
 	while(*first && *second) {
-		if (*first < *second) {
-			smaller.push_back(*first);
-			bigger.push_back(*second);
-		}
-		else {
-			smaller.push_back(*second);
-			bigger.push_back(*first);
-		}
+		smaller.push_back(*first < *second ? *first : second);
 		first++;
 		second++;
 	}
-	if (*first)
-		bigger.push_back(*first);
-	insertionSort(bigger.begin(), smaller.end());
+	if (list.size() > 2)
+		insertionSort(smaller);
+	binaryInsert(list, smaller);
 }
