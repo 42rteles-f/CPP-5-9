@@ -14,30 +14,23 @@ PmergeMe&	PmergeMe::operator=(PmergeMe& copy) {
 	(void)copy; return (*this);
 }
 
-template<typename T>
-void	PmergeMe::insertionSort(T begin, T end, t_exe swap) {
-	int	pos;
-	T	it = begin;
-
-	while (it != end) {
-		pos = findPosition(begin, it);
-		swap(begin, it, pos);
-		it++;
-	}
-}
-
-void	PmergeMe::insertionSort(std::list<int> list) {
-	std::list<int>::iterator	first = _list.begin();
-	std::list<int>::iterator	second = _list.begin();
+void	PmergeMe::insertionSort(std::list<int>& numbers, t_exe move, t_exe swap) {
+	std::list<int>::iterator	first = numbers.begin();
+	std::list<int>::iterator	second = numbers.begin();
+	std::list<int>::iterator	move;
 	std::list<int>				smaller;
 
+	if (numbers.size() < 2)
+		return ;
 	second++;
-	while(*first && *second) {
-		smaller.push_back(*first < *second ? *first : second);
-		first++;
-		second++;
+	while(first != numbers.end() && second != numbers.end()) {
+		move = (*first < *second ? first : second);
+		std::advance(first, 2);
+		std::advance(second, 2);
+		smaller.splice(smaller.end(), numbers, move);
 	}
-	if (list.size() > 2)
-		insertionSort(smaller);
-	binaryInsert(list, smaller);
+	insertionSort(smaller);
+	insertionSort(numbers);
+	binaryInsert(numbers, smaller);
+	std::merge()
 }

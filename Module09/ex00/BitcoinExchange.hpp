@@ -39,11 +39,12 @@ class BitcoinExchange {
 		std::map<std::string, std::string>	data;
 
 		void		loadFile();
-		bool		validValue(std::string line);
-		bool		leapYear(int year);
-		bool		validDay(t_bitdate date);
-		bool		validDate(std::string line);
+		bool		validValue(std::string line) const;
+		bool		leapYear(int year) const;
+		bool		validDay(t_bitdate date) const;
+		bool		validDate(std::string line) const;
 		std::string	getValue(std::string date) const;
+		std::pair<int, int>					stringDifference(std::string first, std::string second) const;
 		std::pair<std::string, std::string>	lineToPair(std::ifstream& file, int separator);
 
 	public:

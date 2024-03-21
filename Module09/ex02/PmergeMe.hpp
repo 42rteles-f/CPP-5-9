@@ -5,7 +5,9 @@
 # include <iostream>
 # include <string>
 # include <fstream>
-# include <sstream> 
+# include <sstream>
+# include <algorithm>
+
 
 typedef void	(*t_exe)();
 
@@ -14,8 +16,7 @@ class PmergeMe {
 		static std::list<int>	_list;
 		static std::vector<int>	_vector;
 		void	PmergeMe::makePairs();
-		template<typename T>
-		void	PmergeMe::insertionSort(T begin, T end, t_exe);
+		void	PmergeMe::insertionSort(std::list<int>& list, t_exe , t_exe insert);
 
 	public:
 		PmergeMe();
