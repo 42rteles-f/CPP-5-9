@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:30:35 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/15 19:52:31 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:33:10 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,7 @@ bool	BitcoinExchange::validDay(t_bitdate date) const {
 		limit = 28 + leapYear(date.year);
 	else
 		limit = 30 + ((date.month > 7) ? ((date.month - 7) % 2) : (date.month % 2));
-<<<<<<< HEAD
-	if (date.day < 0 || date.day > limit)
-=======
 	if ((date.day < 0 || date.day > limit))
->>>>>>> refs/remotes/origin/main
 		return (false);
 	return (true);
 }
@@ -60,13 +56,8 @@ bool	BitcoinExchange::validDate(std::string line) const {
 	t_bitdate	date;
 	char		end;
 
-<<<<<<< HEAD
-	if (std::sscanf(line.c_str(), "%d-%d-%d%c%c",
-			&date.year, &date.month, &date.day, &end, &end) != 4
-=======
 	if (std::sscanf(line.c_str(), "%d-%d-%d %c",
 			&date.year, &date.month, &date.day, &end) != 3
->>>>>>> refs/remotes/origin/main
 			|| date.year < 0 || date.month < 0 || date.month > 12
 			|| !validDay(date))
 		throw std::runtime_error(std::string("Error: bad input => ") + line);
@@ -123,7 +114,7 @@ void    BitcoinExchange::initDataBase(std::string file, char separtor) {
 	try { loadFile(); } catch (...) { throw; };
 }
 
-std::pair<int, int>	BitcoinExchange::stringDifference(std::string first, std::string second) const {
+float	BitcoinExchange::stringDifference(std::string first, std::string second) const {
 
 	size_t	count = 0;
 	int		diff = 0;
@@ -132,13 +123,13 @@ std::pair<int, int>	BitcoinExchange::stringDifference(std::string first, std::st
 		count++;
 	if (count < first.size())
 		diff = std::abs(first[count] - second[count]);
-	return (std::make_pair(count, diff));
+	return (second.size() - count + (diff / 100.0));
 }
 
 std::string    BitcoinExchange::getValue(std::string target) const {
 
 	std::map<std::string, std::string>::const_iterator	find, before;
-	std::pair<int, int>	difference[2];
+	float	difference[2];
 
 	before = find = data.lower_bound(target);
 	if (find == data.begin() || find == data.end())
@@ -148,10 +139,7 @@ std::string    BitcoinExchange::getValue(std::string target) const {
 	before--;
 	difference[0] = stringDifference((*find).second, target);
 	difference[1] = stringDifference((*before).second, target);
-	if (difference[0].first != difference[1].first)
-		return (difference[0].first >= difference[1].first ? (*find).second : (*before).second);
-	else
-		return (difference[0].second <= difference[1].second ? (*find).second : (*before).second);
+	return (difference[0] <= difference[1] ? (*find).second : (*before).second);
 }
 
 void    BitcoinExchange::worthByDate(std::string path, int separator) {

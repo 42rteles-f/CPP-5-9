@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:20:17 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/15 19:12:30 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:31:53 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ class BitcoinExchange {
 		bool		validDay(t_bitdate date) const;
 		bool		validDate(std::string line) const;
 		std::string	getValue(std::string date) const;
-		std::pair<int, int>					stringDifference(std::string first, std::string second) const;
+		// std::pair<int, int>					stringDifference(std::string first, std::string second) const;
+		float					stringDifference(std::string first, std::string second) const;
 		std::pair<std::string, std::string>	lineToPair(std::ifstream& file, int separator);
 
 	public:
