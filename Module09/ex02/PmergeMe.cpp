@@ -14,7 +14,7 @@ PmergeMe&	PmergeMe::operator=(PmergeMe& copy) {
 	(void)copy; return (*this);
 }
 
-void	PmergeMe::insertionSort(std::list<int>& numbers, t_exe move, t_exe swap) {
+void	PmergeMe::insertionSort(std::list<int>& numbers, t_exe asd, t_exe swap) {
 	std::list<int>::iterator	first = numbers.begin();
 	std::list<int>::iterator	second = numbers.begin();
 	std::list<int>::iterator	move;
@@ -32,5 +32,5 @@ void	PmergeMe::insertionSort(std::list<int>& numbers, t_exe move, t_exe swap) {
 	insertionSort(smaller);
 	insertionSort(numbers);
 	binaryInsert(numbers, smaller);
-	std::merge()
 }
+

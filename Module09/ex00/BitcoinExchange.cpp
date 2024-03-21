@@ -132,10 +132,10 @@ std::string    BitcoinExchange::getValue(std::string target) const {
 	std::pair<int, int>	difference[2];
 
 	before = find = data.lower_bound(target);
-	if ((*find).first == target)
-		return ((*find).second);
 	if (find == data.begin() || find == data.end())
 		return (find == data.begin() ? (*find).second : (*data.rbegin()).second);
+	if ((*find).first == target)
+		return ((*find).second);
 	before--;
 	difference[0] = stringDifference((*find).second, target);
 	difference[1] = stringDifference((*before).second, target);
