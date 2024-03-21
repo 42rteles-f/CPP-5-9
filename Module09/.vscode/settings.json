@@ -6,7 +6,8 @@
         "*.tcc": "cpp",
         "cstdint": "cpp",
         "exception": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "fstream": "cpp"
     },
 	"terminal.integrated.profiles.linux": {
         "zsh": {
