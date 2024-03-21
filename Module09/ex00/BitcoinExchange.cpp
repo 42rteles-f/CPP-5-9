@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:30:35 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/21 15:33:10 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:54:07 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,17 +129,17 @@ float	BitcoinExchange::stringDifference(std::string first, std::string second) c
 std::string    BitcoinExchange::getValue(std::string target) const {
 
 	std::map<std::string, std::string>::const_iterator	find, before;
-	float	difference[2];
 
 	before = find = data.lower_bound(target);
-	if (find == data.begin() || find == data.end())
-		return (find == data.begin() ? (*find).second : (*data.rbegin()).second);
-	if ((*find).first == target)
+	if ((*find).first == target || find == data.begin())
 		return ((*find).second);
+	if (find == data.end())
+		return ((*data.rbegin()).second);
 	before--;
-	difference[0] = stringDifference((*find).second, target);
-	difference[1] = stringDifference((*before).second, target);
-	return (difference[0] <= difference[1] ? (*find).second : (*before).second);
+	if (stringDifference((*before).second, target) <= stringDifference((*find).second, target))
+		return ((*before).second);
+	else
+		return ((*find).second);
 }
 
 void    BitcoinExchange::worthByDate(std::string path, int separator) {
