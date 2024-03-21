@@ -8,15 +8,16 @@
 # include <sstream>
 # include <algorithm>
 
-
-typedef void	(*t_exe)();
+typedef std::vector<int>::iterator	(*t_exe)(std::vector<int>::iterator, std::vector<int>::iterator, int);
 
 class PmergeMe {
 	private:
-		static std::list<int>	_list;
-		static std::vector<int>	_vector;
-		void	PmergeMe::makePairs();
-		void	PmergeMe::insertionSort(std::list<int>& list, t_exe , t_exe insert);
+		static const int	jacobsthal[50];
+		std::list<int>		_numbers;
+
+		void	PmergeMe::binaryInsert(std::vector<int>, std::vector<int>, t_exe);
+		// void	PmergeMe::binaryInsert(std::list<int>, std::list<int>, t_exe);
+		void	PmergeMe::sortFordJohnson(std::list<int>& list, t_exe transfer, t_exe insert);
 
 	public:
 		PmergeMe();
