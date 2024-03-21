@@ -1,5 +1,7 @@
 #include "RPN.hpp"
 
+std::stack<int> RPN::expression;
+
 RPN::RPN() {}
 
 RPN::RPN(RPN& copy) {
@@ -8,39 +10,46 @@ RPN::RPN(RPN& copy) {
 
 RPN::~RPN() {}
 
-void	RPN::loadExpression(std::string expression) {
-	std::istringstream	iss(expression);
-	char				piece;
-
-	while (iss >> piece)
-		this->expression.push(piece);
+RPN&	RPN::operator=(RPN& copy) {
+	(void)copy; return (*this);
 }
 
-bool	RPN::isOperation(int input) {
-	return ((input == '+' || input == '-' || input == '*' || input == '/'));
+bool	RPN::solveOperation(std::string operation)
+{
+	float	first, second;
+	int		result;
+
+	if (expression.size() < 2)
+		return (false);
+	first = expression.top();
+	expression.pop();
+	second = expression.top();
+	expression.pop();
+	if (operation == "*" || (operation == "/" && first))
+		result = second * (operation == "*" ? first : (1.0 / first));
+	else if (operation == "+" || operation == "-")
+		result = second + (operation == "+" ? first : -first);
+	else
+		return (false);
+	expression.push(result);
+	return (true);
 }
 
-void	RPN::calculate(std::string input) {
+bool	RPN::calculate(std::string input) {
+	std::istringstream	iss(input);
+	std::string			token = "start";
 
-	int	size;
-	int	result = 0;
-	int	operation;
-
-	loadExpression(input);
-	size = expression.size();
-	for (int i = 0; i < size; i++) {
-		operation = expression.top();
-		if (!isOperation(operation))
-			throw std::runtime_error("Error: Invalid RPN.");
+	while (!iss.eof())
+	{
+		token.clear();
+		while (iss >> token && token.length() == 1 && std::isdigit(token[0]))
+			expression.push(token[0] - '0');
+		if ((!token.empty() && !solveOperation(token))
+			|| (token.empty() && expression.size() != 1)) {
+			std::cout << "Error" << std::endl;
+			return (false);
+		}
 	}
+	std::cout << expression.top() << std::endl;
+	return (true);
 }
-
-
-
-
-
-
-
-
-
-

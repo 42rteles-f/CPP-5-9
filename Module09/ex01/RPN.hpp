@@ -6,20 +6,20 @@
 # include <fstream>
 # include <sstream> 
 
+
 class RPN {
 	private:
-		std::stack<int>	expression;
+		static std::stack<int>	expression;
 
-		void	loadExpression(std::string expression);
-		bool	isOperation(int input);
-
-	public:
 		RPN();
 		RPN(RPN& copy);
 		~RPN();
 
 		RPN&	operator=(RPN& copy);
 
-		void	calculate(std::string expression);
+		static bool	solveOperation(std::string operation);
+
+	public:
+		static bool	calculate(std::string expression);
 } ;
 
