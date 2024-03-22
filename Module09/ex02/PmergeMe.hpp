@@ -29,5 +29,6 @@ class PmergeMe {
 
 	public:
 		static void	listFordJohnson(std::list<int>& list);
+		static void	vectorFordJohnson(std::vector<int>& list);
 } ;
 

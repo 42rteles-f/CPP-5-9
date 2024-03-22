@@ -106,22 +106,21 @@ void	PmergeMe::listFordJohnson(std::list<int>& numbers) {
 }
 
 
-// void	PmergeMe::sortFordJohnson(std::vector<int>& numbers) {
-// 	std::vector<int>::iterator	first = numbers.begin();
-// 	std::vector<int>::iterator	second = numbers.begin();
-// 	std::vector<int>::iterator	move;
-// 	std::vector<int>			larger;
+void	PmergeMe::vectorFordJohnson(std::vector<int>& numbers) {
+	std::vector<int>::iterator	eraser;
+	std::vector<int>			larger;
+	int							move, counter, total;
 
-// 	if (numbers.size() < 2)
-// 		return ;
-// 	second++;
-// 	while(first != numbers.end() && second != numbers.end()) {
-// 		move = (*first < *second ? first : second);
-// 		std::advance(first, 2);
-// 		std::advance(second, 2);
-// 		larger.insert(larger.end(), *move);
-// 		numbers.erase(move);
-// 	}
-// 	sortFordJohnson(larger);
-// 	binaryInsert(numbers, larger);
-// }
+	if (numbers.size() < 2)
+		return ;
+	counter = 0;
+	total = numbers.size() / 2;
+	while(counter < total) {
+		move = (numbers[counter] < numbers[counter + 1] ? numbers[counter] : numbers[counter + 1]);
+		larger.insert(larger.end(), move);
+		std::advance(eraser, counter + (move == numbers[counter + 1]));
+		numbers.erase(eraser);
+	}
+	vectorFordJohnson(larger);
+	// binaryJacobsthalInsert(numbers, larger);
+}
