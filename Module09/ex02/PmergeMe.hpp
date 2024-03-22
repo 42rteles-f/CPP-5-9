@@ -12,18 +12,22 @@ typedef std::vector<int>::iterator	(*t_exe)(std::vector<int>::iterator, std::vec
 
 class PmergeMe {
 	private:
-		static const int	jacobsthal[50];
-		std::list<int>		_numbers;
+		static const int	jacobsthal[100];
 
-		void	PmergeMe::binaryInsert(std::vector<int>, std::vector<int>, t_exe);
-		// void	PmergeMe::binaryInsert(std::list<int>, std::list<int>, t_exe);
-		void	PmergeMe::sortFordJohnson(std::list<int>& list, t_exe transfer, t_exe insert);
-
-	public:
 		PmergeMe();
 		PmergeMe(PmergeMe& copy);
 		~PmergeMe();
 
 		PmergeMe&	operator=(PmergeMe& copy);
+
+		// void	binaryInsert(std::vector<int>& a);
+		// void	sortFordJohnson(std::vector<int>& list);
+		// void	binaryInsert(std::list<int>, std::list<int>, t_exe);
+		static void	jacobsthalInsert(std::list<int>&, std::list<int>&);
+		static std::list<int>::iterator	listIndex(std::list<int>& base, int index);
+		static std::list<int>::iterator	findNext(std::list<int>& base, int index);
+
+	public:
+		static void	listFordJohnson(std::list<int>& list);
 } ;
 
