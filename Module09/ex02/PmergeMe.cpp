@@ -23,28 +23,6 @@ std::vector<int>::iterator	reLowerBound(std::vector<int>::iterator a, std::vecto
 	return (std::lower_bound(a, b, c));
 }
 
-// void	PmergeMe::binaryInsert(std::list<int> base, std::list<int> merge) {
-
-// 	merge.sort();
-// 	base.merge(merge);
-// }
-
-// void	PmergeMe::binaryInsert(std::vector<int> base, std::vector<int> merge, t_exe findPos) {
-
-// 	int	index = 0;
-// 	int	current;
-// 	std::vector<int>::iterator	pos;
-
-// 	while (jacobsthal[index] < merge.size()) {
-// 		current = (jacobsthal[index] < merge.size() ? jacobsthal[index] : merge.size() - 1);
-// 		while (current > jacobsthal[index - 1]) {
-// 			pos = std::lower_bound(base.begin(), base.end(), merge[current]);
-// 			base.insert(pos, merge[current]);
-// 			current--;
-// 		}
-// 	}
-// }
-
 std::list<int>::iterator	PmergeMe::listIndex(std::list<int>& base, int index) {
 	std::list<int>::iterator	it = base.begin();
 	int	find;
@@ -57,7 +35,7 @@ std::list<int>::iterator	PmergeMe::listIndex(std::list<int>& base, int index) {
 	return (it);
 }
 
-std::list<int>::iterator	PmergeMe::findNext(std::list<int>& base, int find) {
+std::list<int>::iterator	PmergeMe::listElement(std::list<int>& base, int find) {
 	std::list<int>::iterator	it = base.begin();
 
 	while (it != base.end() && find > *it) {
@@ -68,32 +46,30 @@ std::list<int>::iterator	PmergeMe::findNext(std::list<int>& base, int find) {
 
 void	PmergeMe::jacobsthalInsert(std::list<int>& base, std::list<int>& merge) {
 
-	int	index;
-	int	current;
-	std::list<int>::iterator	take;
-	std::list<int>::iterator	put;
+	int	index, current;
+	std::list<int>::iterator	where, what;
 
 	index = 0;
 	do {
 		index++;
 		current = (jacobsthal[index] < (int)merge.size() ? jacobsthal[index] : merge.size() - 1);
 		while (current > jacobsthal[index - 1]) {
-			take = listIndex(merge, current);
-			put = findNext(base, *take);
-			base.insert(put, *take);
+			what = listIndex(merge, current);
+			where = listElement(base, *what);
+			base.insert(where, *what);
 			current--;
 		}
 	} while (jacobsthal[index] < (int)merge.size());
 }
 
 void	PmergeMe::listFordJohnson(std::list<int>& numbers) {
-	std::list<int>::iterator	first = numbers.begin();
-	std::list<int>::iterator	second = numbers.begin();
-	std::list<int>::iterator	move;
+
+	std::list<int>::iterator	first, second, move;
 	std::list<int>				smaller;
 
 	if (numbers.size() < 2)
 		return ;
+	first = second = numbers.begin();
 	second++;
 	while(first != numbers.end() && second != numbers.end()) {
 		move = (*first < *second ? first : second);
@@ -105,6 +81,22 @@ void	PmergeMe::listFordJohnson(std::list<int>& numbers) {
 	jacobsthalInsert(numbers, smaller);
 }
 
+void	PmergeMe::binaryJacobsthalInsert(std::vector<int>& base, std::vector<int>& merge) {
+
+	std::vector<int>::iterator	where;
+	int	index, current;
+
+	index = 0;
+	do {
+		index++;
+		current = (jacobsthal[index] < (int)merge.size() ? jacobsthal[index] : merge.size() - 1);
+		while (current > jacobsthal[index - 1]) {
+			where = std::lower_bound(base.begin(), base.end(), merge[current]);
+			base.insert(where, merge[current]);
+			current--;
+		}
+	} while (jacobsthal[index] < (int)merge.size());
+}
 
 void	PmergeMe::vectorFordJohnson(std::vector<int>& numbers) {
 	std::vector<int>::iterator	eraser;
@@ -122,5 +114,5 @@ void	PmergeMe::vectorFordJohnson(std::vector<int>& numbers) {
 		numbers.erase(eraser);
 	}
 	vectorFordJohnson(larger);
-	// binaryJacobsthalInsert(numbers, larger);
+	binaryJacobsthalInsert(numbers, larger);
 }
