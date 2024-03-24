@@ -8,8 +8,6 @@
 # include <sstream>
 # include <algorithm>
 
-typedef std::vector<int>::iterator	(*t_exe)(std::vector<int>::iterator, std::vector<int>::iterator, int);
-
 class PmergeMe {
 
 	private:
@@ -27,7 +25,7 @@ class PmergeMe {
 		static std::list<int>::iterator	listElement(std::list<int>& base, int index);
 
 	public:
-		static void	listFordJohnson(std::list<int>& list);
-		static void	vectorFordJohnson(std::vector<int>& list);
+		static void	sortFordJohnson(std::list<int>& list);
+		static void	sortFordJohnson(std::vector<int>& array);
 } ;
 

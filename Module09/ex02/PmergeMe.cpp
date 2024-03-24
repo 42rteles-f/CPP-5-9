@@ -62,7 +62,7 @@ void	PmergeMe::jacobsthalInsert(std::list<int>& base, std::list<int>& merge) {
 	} while (jacobsthal[index] < (int)merge.size());
 }
 
-void	PmergeMe::listFordJohnson(std::list<int>& numbers) {
+void	PmergeMe::sortFordJohnson(std::list<int>& numbers) {
 
 	std::list<int>::iterator	first, second, move;
 	std::list<int>				smaller;
@@ -77,7 +77,7 @@ void	PmergeMe::listFordJohnson(std::list<int>& numbers) {
 		std::advance(second, 2);
 		smaller.splice(smaller.end(), numbers, move);
 	}
-	listFordJohnson(numbers);
+	sortFordJohnson(numbers);
 	jacobsthalInsert(numbers, smaller);
 }
 
@@ -98,7 +98,15 @@ void	PmergeMe::binaryJacobsthalInsert(std::vector<int>& base, std::vector<int>& 
 	} while (jacobsthal[index] < (int)merge.size());
 }
 
-void	PmergeMe::vectorFordJohnson(std::vector<int>& numbers) {
+void	printVector(std::vector<int> vector) {
+	for (std::vector<int>::iterator it = vector.begin();
+				it != vector.end(); it++) {
+		std::cout << *it << ", ";
+	}
+	std::cout << std::endl;
+}
+
+void	PmergeMe::sortFordJohnson(std::vector<int>& numbers) {
 	std::vector<int>::iterator	eraser;
 	std::vector<int>			larger;
 	int							move, counter, total;
@@ -110,9 +118,18 @@ void	PmergeMe::vectorFordJohnson(std::vector<int>& numbers) {
 	while(counter < total) {
 		move = (numbers[counter] < numbers[counter + 1] ? numbers[counter] : numbers[counter + 1]);
 		larger.insert(larger.end(), move);
+		eraser = numbers.begin();
 		std::advance(eraser, counter + (move == numbers[counter + 1]));
 		numbers.erase(eraser);
+		counter++;
+		// printVector(numbers);
+		// printVector(larger);
 	}
-	vectorFordJohnson(larger);
+	sortFordJohnson(numbers);
 	binaryJacobsthalInsert(numbers, larger);
 }
+
+// 1 2 3 4 5 6 7 8 9 0 
+// 1 3 4 5 6 7 8 9 0
+// 1 3 5 6 7 8 9 0
+     
