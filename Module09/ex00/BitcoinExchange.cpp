@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:30:35 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/21 15:54:07 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/24 23:14:10 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	BitcoinExchange::validValue(std::string line) const {
     double value = 0;
 
 	if (!(iss >> value))
-		throw std::runtime_error("Error: impossibble convergion.");
+		throw std::runtime_error("Error: Impossibble Conversion.");
     if (value < 0.0)
 		throw std::runtime_error("Error: not a positive number.");
 	if (value > 1000.0)
@@ -88,7 +88,11 @@ std::pair<std::string, std::string>	BitcoinExchange::lineToPair(std::ifstream& f
 	while ((pos = line.find(' ')) != line.npos)
 		line.erase(pos, 1);
 	pos = line.find(separator);
-	return (std::make_pair(line.substr(0, pos), line.substr(pos + 1)));
+	if (pos != line.npos)
+		return (std::make_pair(line.substr(0, pos), line.substr(pos + 1)));
+	else
+		return (std::make_pair(line.substr(0, pos), std::string("")));
+		
 }
 
 void    BitcoinExchange::loadFile(void) {
@@ -114,32 +118,15 @@ void    BitcoinExchange::initDataBase(std::string file, char separtor) {
 	try { loadFile(); } catch (...) { throw; };
 }
 
-float	BitcoinExchange::stringDifference(std::string first, std::string second) const {
-
-	size_t	count = 0;
-	int		diff = 0;
-
-	while (count < first.size() && first[count] == second[count])
-		count++;
-	if (count < first.size())
-		diff = std::abs(first[count] - second[count]);
-	return (second.size() - count + (diff / 100.0));
-}
-
 std::string    BitcoinExchange::getValue(std::string target) const {
 
-	std::map<std::string, std::string>::const_iterator	find, before;
+	std::map<std::string, std::string>::const_iterator	find;
 
-	before = find = data.lower_bound(target);
+	find = data.lower_bound(target);
 	if ((*find).first == target || find == data.begin())
 		return ((*find).second);
-	if (find == data.end())
-		return ((*data.rbegin()).second);
-	before--;
-	if (stringDifference((*before).second, target) <= stringDifference((*find).second, target))
-		return ((*before).second);
-	else
-		return ((*find).second);
+	--find;
+	return ((*find).second);
 }
 
 void    BitcoinExchange::worthByDate(std::string path, int separator) {
@@ -154,7 +141,7 @@ void    BitcoinExchange::worthByDate(std::string path, int separator) {
 		throw std::runtime_error("Error: could not open file.");
 	std::getline(file, rate);
 	log = lineToPair(file, separator);
-	while (log.first.length()) {
+	while (!file.eof() && file.good()) {
 		try {
 			if (validDate(log.first) && validValue(log.second))
 				rate = getValue(log.first);
@@ -168,3 +155,16 @@ void    BitcoinExchange::worthByDate(std::string path, int separator) {
 		log = lineToPair(file, separator);
 	}
 }
+
+
+// float	BitcoinExchange::stringDifference(std::string first, std::string second) const {
+
+// 	size_t	count = 0;
+// 	int		diff = 0;
+
+// 	while (count < first.size() && first[count] == second[count])
+// 		count++;
+// 	if (count < first.size())
+// 		diff = std::abs(first[count] - second[count]);
+// 	return (second.size() - count + (diff / 100.0));
+// }

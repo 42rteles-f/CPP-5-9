@@ -6,7 +6,7 @@
 /*   By: rteles-f <rteles-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:18:10 by rteles-f          #+#    #+#             */
-/*   Updated: 2024/03/14 17:41:47 by rteles-f         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:11:22 by rteles-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ template<typename T>
 class MutantStack: public std::stack<T> {
 	public:
 		typedef typename std::stack<T>::container_type::iterator iterator;
-		// typedef typename std::stack<T>::container_type::iterator const_iterator;
+		typedef typename std::stack<T>::container_type::iterator const_iterator;
 		MutantStack() {};
 		MutantStack(MutantStack const &tocopy) {
 			*this = tocopy;
@@ -39,12 +39,12 @@ class MutantStack: public std::stack<T> {
 		iterator		end(void) {
 			return (this->c.end());
 		}
-		// const_iterator	cbegin(void) {
-		// 	return (this->c.begin());
-		// }
-		// const_iterator	cend(void) {
-		// 	return (this->c.end());
-		// }
+		const_iterator	cbegin(void) {
+			return (this->c.begin());
+		}
+		const_iterator	cend(void) {
+			return (this->c.end());
+		}
 } ;
 
 #endif

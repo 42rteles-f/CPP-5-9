@@ -6,7 +6,8 @@
         "*.tcc": "cpp",
         "cstdint": "cpp",
         "exception": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "stdexcept": "cpp"
     },
 	"terminal.integrated.profiles.linux": {
         "zsh": {

@@ -64,7 +64,6 @@ void	Span::addNumber(std::vector<int>::iterator start, std::vector<int>::iterato
 	}
 }
 
-	// std::cout << "size " << _numbers.size() << std::endl;
 void	Span::addNumber(const int number) {
 	if (_numbers.size() >= _numbers.capacity())
 		throw std::runtime_error("Span is Full.");

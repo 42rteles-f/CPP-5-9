@@ -14,9 +14,9 @@
 
 int	main(void)
 {
-	Span test(50);
+	Span	test(50);
 
-	for (int i = -30; i < -15; i+=2)
+	for (int i = 0; i < 15; i+=2)
 		test.addNumber(i);
 	std::cout << "short: " << test.shortestSpan() << std::endl;
 	std::cout << "long: " << test.longestSpan() << std::endl;
@@ -33,6 +33,16 @@ int	main(void)
 	catch (std::exception& event) {
 		std::cout << event.what() << std::endl;	
 	}
+
+	Span	big(20000);
+	try {
+		big.addNumber(5);
+		for (int i = 1000; i < 20000; i++)
+			big.addNumber(i);
+		std::cout << "short: " << big.shortestSpan() << std::endl;
+		std::cout << "long: " << big.longestSpan() << std::endl;
+	}
+	catch (std::exception& e) {std::cout << e.what() << std::endl;}
 	{
 		Span sp = Span(5);
 		sp.addNumber(6);

@@ -14,14 +14,14 @@
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
-# include <iostream>
-# include <vector>
-# include <list>
 # include <algorithm>
 
+/*
+	Returns a iterator to the element or stack.end() if it doesnt find.
+*/
 template <typename T>
 typename T::iterator easyfind(T& stack, int find) {
-	return std::find(stack.begin(), stack.end(), find);
+	return (std::find(stack.begin(), stack.end(), find));
 }
 
 #endif

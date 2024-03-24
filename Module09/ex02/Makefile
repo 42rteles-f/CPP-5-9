@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= 	Bureaucrat
+NAME		= 	PmergeMe
 
 CC			= 	c++ #-g -fsanitize=address
 
@@ -20,7 +20,7 @@ RM			= 	rm -f
 
 INCLUDES	= 	-I
 
-SRCS		=	main.cpp Bureaucrat.cpp
+SRCS		=	main.cpp PmergeMe.cpp
 
 OBJS		= 	$(SRCS:.cpp=.o)
 
