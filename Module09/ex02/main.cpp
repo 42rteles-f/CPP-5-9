@@ -1,22 +1,60 @@
 #include "PmergeMe.hpp"
+#include <ctime>
+#include <sstream>
+#include <string>
+#include <iostream>
+#include <iomanip>
 
-int	main(void)
+void	printVector(std::vector<int> vector) {
+
+	int	limit = vector.size() - 1;
+
+	for (int i = 0; i < limit; i++) {
+		std::cout << vector[i] << " ";
+	}
+	std::cout << *(vector.end() - 1);
+}
+
+int	main(int ac, char **av)
 {
-	int	list_array[12] = {123123, 98, 100, 3, 5, 2, 98, 21, 31, 44, 999, 1123};
-	int	vector_array[12] = {123123, 98, 100, 3, 5, 2, 98, 21, 31, 44, 999, 1123};
-	std::list<int>	myList(list_array, list_array + 12);
-	std::vector<int>	myVector(vector_array, vector_array + 12);
+	std::istringstream	iss;
+	std::list<int>		myList;
+	std::vector<int>	myVector;
+	std::time_t			start, end;
+	double				list_time, vector_time;
+	int					number;
 
-	PmergeMe::sortFordJohnson(myList);
-	for (std::list<int>::iterator it = myList.begin();
-			it != myList.end(); it++) {
-		std::cout << *it << ", ";
+	if (ac < 2)
+		return (1);
+	for (int i = 1; av[i]; i++) {
+		iss.str(av[i]);
+		if (!(iss >> number)) {
+			std::cout << "Invalid Input." << std::endl;
+			return (2);
+		}
+		iss.clear();
+		myList.push_back(number);
+		myVector.push_back(number);
 	}
-	std::cout << std::endl;
+
+	std::cout << std::fixed;
+
+	std::cout << "Before:  "; printVector(myVector); std::cout << std::endl;
+
+	start = std::clock();
 	PmergeMe::sortFordJohnson(myVector);
-	for (std::vector<int>::iterator it = myVector.begin();
-			it != myVector.end(); it++) {
-		std::cout << *it << ", ";
-	}
+	end = std::clock();
+	vector_time = (double)(end - start) / CLOCKS_PER_SEC;
 
+	start = std::clock();
+	PmergeMe::sortFordJohnson(myList);
+	end = std::clock();
+	list_time = (double)(end - start) / CLOCKS_PER_SEC;
+
+	std::cout << "After:   "; printVector(myVector); std::cout << std::endl;
+
+	std::cout	<< "Time to process a range of " << myVector.size()
+				<< " elements with std::vector " << vector_time << std::endl;
+	std::cout	<< "Time to process a range of " << myList.size()
+				<< " elements with std::list   " << list_time << std::endl;
 }

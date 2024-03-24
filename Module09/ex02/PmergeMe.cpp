@@ -1,10 +1,11 @@
 #include "PmergeMe.hpp"
 
 const int PmergeMe::jacobsthal[100] = {
-	-1,0,1,3,5,7,10,13,16,19,22,26,30,34,38,42,46,50,54,
-	58,62,66,71,76,81,86,91,96,101,106,111,116,121,
-	126,131,136,141,146,151,156,161,166,171,177,183,
-	189,195,201,207,213,219,225,231,237,243,249,255};
+	-1, 0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923,
+	21845, 43691, 87381, 174763, 349525, 699051, 1398101, 2796203, 5592405,
+	11184811, 22369621, 44739243, 89478485, 178956971, 357913941, 715827883,
+	1431655765
+};
 
 PmergeMe::PmergeMe()
 {}
@@ -17,10 +18,6 @@ PmergeMe::~PmergeMe() {}
 
 PmergeMe&	PmergeMe::operator=(PmergeMe& copy) {
 	(void)copy; return (*this);
-}
-
-std::vector<int>::iterator	reLowerBound(std::vector<int>::iterator a, std::vector<int>::iterator b, int c) {
-	return (std::lower_bound(a, b, c));
 }
 
 std::list<int>::iterator	PmergeMe::listIndex(std::list<int>& base, int index) {
@@ -98,38 +95,32 @@ void	PmergeMe::binaryJacobsthalInsert(std::vector<int>& base, std::vector<int>& 
 	} while (jacobsthal[index] < (int)merge.size());
 }
 
-void	printVector(std::vector<int> vector) {
-	for (std::vector<int>::iterator it = vector.begin();
-				it != vector.end(); it++) {
-		std::cout << *it << ", ";
-	}
-	std::cout << std::endl;
-}
-
 void	PmergeMe::sortFordJohnson(std::vector<int>& numbers) {
-	std::vector<int>::iterator	eraser;
-	std::vector<int>			larger;
-	int							move, counter, total;
+	std::vector<int>	copy, smaller;
+	int	size = numbers.size() - 1;
+	int	i = 0;
 
 	if (numbers.size() < 2)
 		return ;
-	counter = 0;
-	total = numbers.size() / 2;
-	while(counter < total) {
-		move = (numbers[counter] < numbers[counter + 1] ? numbers[counter] : numbers[counter + 1]);
-		larger.insert(larger.end(), move);
-		eraser = numbers.begin();
-		std::advance(eraser, counter + (move == numbers[counter + 1]));
-		numbers.erase(eraser);
-		counter++;
-		// printVector(numbers);
-		// printVector(larger);
+	copy = numbers;
+	numbers.clear();
+	while (i < size)
+	{
+		if (copy[i] > copy[i + 1]) {
+			numbers.push_back(copy[i]);
+			smaller.push_back(copy[i + 1]);
+		}
+		else {
+			numbers.push_back(copy[i + 1]);
+			smaller.push_back(copy[i]);
+		}
+		i += 2;
 	}
+	if (copy.size() % 2)
+		numbers.push_back(copy[i]);
 	sortFordJohnson(numbers);
-	binaryJacobsthalInsert(numbers, larger);
+	binaryJacobsthalInsert(numbers, smaller);
 }
 
-// 1 2 3 4 5 6 7 8 9 0 
-// 1 3 4 5 6 7 8 9 0
-// 1 3 5 6 7 8 9 0
-     
+
+

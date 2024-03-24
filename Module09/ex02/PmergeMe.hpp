@@ -2,10 +2,6 @@
 
 # include <list>
 # include <vector>
-# include <iostream>
-# include <string>
-# include <fstream>
-# include <sstream>
 # include <algorithm>
 
 class PmergeMe {
@@ -28,4 +24,3 @@ class PmergeMe {
 		static void	sortFordJohnson(std::list<int>& list);
 		static void	sortFordJohnson(std::vector<int>& array);
 } ;
-
