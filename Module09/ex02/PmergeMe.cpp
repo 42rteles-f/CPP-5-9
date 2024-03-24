@@ -20,7 +20,7 @@ PmergeMe&	PmergeMe::operator=(PmergeMe& copy) {
 	(void)copy; return (*this);
 }
 
-std::list<int>::iterator	PmergeMe::listIndex(std::list<int>& base, int index) {
+std::list<int>::iterator	PmergeMe::elementAt(std::list<int>& base, int index) {
 	std::list<int>::iterator	it = base.begin();
 	int	find;
 
@@ -32,7 +32,7 @@ std::list<int>::iterator	PmergeMe::listIndex(std::list<int>& base, int index) {
 	return (it);
 }
 
-std::list<int>::iterator	PmergeMe::listElement(std::list<int>& base, int find) {
+std::list<int>::iterator	PmergeMe::findIndexOf(std::list<int>& base, int find) {
 	std::list<int>::iterator	it = base.begin();
 
 	while (it != base.end() && find > *it) {
@@ -43,18 +43,18 @@ std::list<int>::iterator	PmergeMe::listElement(std::list<int>& base, int find) {
 
 void	PmergeMe::jacobsthalInsert(std::list<int>& base, std::list<int>& merge) {
 
-	int	index, current;
+	int	index, pos;
 	std::list<int>::iterator	where, what;
 
 	index = 0;
 	do {
 		index++;
-		current = (jacobsthal[index] < (int)merge.size() ? jacobsthal[index] : merge.size() - 1);
-		while (current > jacobsthal[index - 1]) {
-			what = listIndex(merge, current);
-			where = listElement(base, *what);
+		pos = (jacobsthal[index] < (int)merge.size() ? jacobsthal[index] : merge.size() - 1);
+		while (pos > jacobsthal[index - 1]) {
+			what = elementAt(merge, pos);
+			where = findIndexOf(base, *what);
 			base.insert(where, *what);
-			current--;
+			pos--;
 		}
 	} while (jacobsthal[index] < (int)merge.size());
 }

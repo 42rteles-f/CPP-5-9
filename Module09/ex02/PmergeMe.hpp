@@ -17,8 +17,8 @@ class PmergeMe {
 
 		static void	jacobsthalInsert(std::list<int>&, std::list<int>&);
 		static void	binaryJacobsthalInsert(std::vector<int>&, std::vector<int>&);
-		static std::list<int>::iterator	listIndex(std::list<int>& base, int index);
-		static std::list<int>::iterator	listElement(std::list<int>& base, int index);
+		static std::list<int>::iterator	elementAt(std::list<int>& base, int index);
+		static std::list<int>::iterator	findIndexOf(std::list<int>& base, int index);
 
 	public:
 		static void	sortFordJohnson(std::list<int>& list);
