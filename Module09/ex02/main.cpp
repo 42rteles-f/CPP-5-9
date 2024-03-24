@@ -26,9 +26,9 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (1);
-	for (int i = 1; av[i]; i++) {
+	for (size_t i = 1; av[i]; i++) {
 		iss.str(av[i]);
-		if (!(iss >> number)) {
+		if (!(iss >> number) || (i > 1431655765)) {
 			std::cout << "Invalid Input." << std::endl;
 			return (2);
 		}

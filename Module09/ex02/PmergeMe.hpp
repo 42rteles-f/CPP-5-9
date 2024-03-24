@@ -7,7 +7,7 @@
 class PmergeMe {
 
 	private:
-		static const int	jacobsthal[100];
+		static const int	jacobsthal[35];
 
 		PmergeMe();
 		PmergeMe(PmergeMe& copy);
