@@ -14,11 +14,16 @@ PmergeMe&	PmergeMe::operator=(PmergeMe& copy) {
 	(void)copy; return (*this);
 }
 
-void	PmergeMe::insertionSort(std::list<int>& numbers, t_exe asd, t_exe swap) {
+template<typename T>
+void	setFunctions(T test) {
+
+}
+
+void	PmergeMe::sortFordJohnson(std::list<int>& numbers, t_exe transfer, t_exe insert) {
 	std::list<int>::iterator	first = numbers.begin();
 	std::list<int>::iterator	second = numbers.begin();
 	std::list<int>::iterator	move;
-	std::list<int>				smaller;
+	std::list<int>				larger;
 
 	if (numbers.size() < 2)
 		return ;
@@ -27,10 +32,9 @@ void	PmergeMe::insertionSort(std::list<int>& numbers, t_exe asd, t_exe swap) {
 		move = (*first < *second ? first : second);
 		std::advance(first, 2);
 		std::advance(second, 2);
-		smaller.splice(smaller.end(), numbers, move);
+		transfer(larger.end(), numbers, move);
 	}
-	insertionSort(smaller);
-	insertionSort(numbers);
-	binaryInsert(numbers, smaller);
+	sortFordJohnson(larger, transfer, insert);
+	binaryInsert(numbers, larger, insert);
 }
 

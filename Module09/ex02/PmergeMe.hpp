@@ -9,14 +9,15 @@
 # include <algorithm>
 
 
-typedef void	(*t_exe)();
+typedef void	(*t_exe)(...);
 
 class PmergeMe {
 	private:
 		static std::list<int>	_list;
 		static std::vector<int>	_vector;
 		void	PmergeMe::makePairs();
-		void	PmergeMe::insertionSort(std::list<int>& list, t_exe , t_exe insert);
+		void	PmergeMe::binaryInsert();
+		void	PmergeMe::sortFordJohnson(std::list<int>& list, t_exe , t_exe insert);
 
 	public:
 		PmergeMe();
