@@ -4,6 +4,15 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <sstream> 
+# include <iostream>
+# include <algorithm>
+# include <stack>
+# include <map>
+# include <string>
+# include <fstream>
+# include <sstream> 
+# include <iomanip>
 
 void	printVector(std::vector<int> vector) {
 
@@ -17,22 +26,20 @@ void	printVector(std::vector<int> vector) {
 
 int	main(int ac, char **av)
 {
-	std::istringstream	iss;
 	std::list<int>		myList;
 	std::vector<int>	myVector;
 	std::time_t			start, end;
 	double				list_time, vector_time;
 	int					number;
+	char				last;
 
 	if (ac < 2)
 		return (1);
 	for (size_t i = 1; av[i]; i++) {
-		iss.str(av[i]);
-		if (!(iss >> number) || (i > 1431655765)) {
+		if (std::sscanf(av[i], "%i%c", &number, &last) != 1 || number < 0) {
 			std::cout << "Invalid Input." << std::endl;
 			return (2);
 		}
-		iss.clear();
 		myList.push_back(number);
 		myVector.push_back(number);
 	}

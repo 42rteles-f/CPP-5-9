@@ -99,6 +99,7 @@ void	PmergeMe::sortFordJohnson(std::vector<int>& numbers) {
 	std::vector<int>	copy, smaller;
 	int	size = numbers.size() - 1;
 	int	i = 0;
+	int	dif;
 
 	if (numbers.size() < 2)
 		return ;

@@ -45,7 +45,8 @@
 		"utility": "cpp",
 		"initializer_list": "cpp",
 		"list": "cpp",
-		"map": "cpp"
+		"map": "cpp",
+		"stack": "cpp"
 	},
 	"terminal.integrated.profiles.linux": {
         "zsh": {

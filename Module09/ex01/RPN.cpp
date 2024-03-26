@@ -39,7 +39,7 @@ bool	RPN::calculate(std::string input) {
 	std::istringstream	iss(input);
 	std::string			token = "start";
 
-	while (!iss.eof())
+	while (!token.empty())
 	{
 		token.clear();
 		while (iss >> token && token.length() == 1 && std::isdigit(token[0]))
